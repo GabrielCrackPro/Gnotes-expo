@@ -9,15 +9,14 @@ import { Note } from "../models/Note";
 import { useTheme, IconButton, Text, Icon } from "react-native-paper";
 import WebView from "react-native-webview";
 import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { DrawerNavigation } from "../models/navigation";
+import { useNavigation } from "../hooks/useNavigation";
 
 interface NoteProps {
   note: Note;
 }
 
 const NoteItem: React.FC<NoteProps> = ({ note }) => {
-  const navigation = useNavigation<DrawerNavigation>();
+  const navigation = useNavigation();
   const { colors } = useTheme();
 
   const [containsHtml, _] = useState(note.body.includes("<"));

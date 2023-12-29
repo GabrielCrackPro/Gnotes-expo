@@ -1,13 +1,9 @@
 import React, { useCallback } from "react";
 import { View, ViewProps } from "react-native";
-import {
-  useNavigation,
-  useIsFocused,
-  useFocusEffect,
-} from "@react-navigation/native";
-import { DrawerNavigation } from "../models/navigation";
+import { useIsFocused, useFocusEffect } from "@react-navigation/native";
 import useAuth from "../hooks/useAuth";
 import LockedView from "./LockedView";
+import { useNavigation } from "../hooks/useNavigation";
 
 interface AuthViewProps extends ViewProps {
   children: React.ReactNode;
@@ -21,7 +17,7 @@ const AuthView: React.FC<AuthViewProps> = ({
   authMessage,
   ...props
 }) => {
-  const navigation = useNavigation<DrawerNavigation>();
+  const navigation = useNavigation();
   const isFocused = useIsFocused();
 
   const { checkAuth, isAuthenticated } = useAuth({

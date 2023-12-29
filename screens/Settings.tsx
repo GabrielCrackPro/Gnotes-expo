@@ -8,14 +8,14 @@ import {
 import React from "react";
 import { List, useTheme } from "react-native-paper";
 import { clearStorage } from "../utils/storage";
-import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { DrawerActions } from "@react-navigation/native";
 import { useAppContext } from "../AppContext";
 import useAuth from "../hooks/useAuth";
-import { DrawerNavigation } from "../models/navigation";
+import { useNavigation } from "../hooks/useNavigation";
 
 const Settings: React.FC = () => {
   const { colors } = useTheme();
-  const navigation = useNavigation<DrawerNavigation>();
+  const navigation = useNavigation();
   const { isAppLocked, toggleAppLocked } = useAppContext();
   const { requestAuth } = useAuth({
     navigation: navigation,

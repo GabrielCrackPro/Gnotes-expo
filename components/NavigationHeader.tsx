@@ -1,5 +1,4 @@
 import {
-  Dimensions,
   Platform,
   StyleProp,
   StyleSheet,
@@ -8,17 +7,12 @@ import {
   ViewStyle,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { IconButton, Searchbar, Text, useTheme } from "react-native-paper";
+import { IconButton, Text, useTheme } from "react-native-paper";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  DrawerActions,
-  ParamListBase,
-  RouteProp,
-  useNavigation,
-} from "@react-navigation/native";
+import { ParamListBase, RouteProp } from "@react-navigation/native";
 import { getBookFromId } from "../utils/books";
-import { DrawerNavigation } from "../models/navigation";
+import { useNavigation } from "../hooks/useNavigation";
 
 interface NavigationHeaderProps {
   route: RouteProp<ParamListBase, string>;
@@ -31,11 +25,9 @@ interface RouteParams {
 
 const NavigationHeader: React.FC<NavigationHeaderProps> = ({ route }) => {
   const { colors } = useTheme();
-  const navigation = useNavigation<DrawerNavigation>();
+  const navigation = useNavigation();
 
   const [bookName, setBookName] = useState("");
-  const [searchMode, setSearchMode] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const getBook = async () => {
@@ -50,7 +42,6 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({ route }) => {
   const headerDefaultStyles: StyleProp<ViewStyle> = {
     backgroundColor: colors.background,
     borderBottomColor: colors.primary,
-    justifyContent: searchMode ? "flex-start" : "space-between",
   };
 
   const headerTitleDefaultStyles: StyleProp<TextStyle> = {
@@ -58,19 +49,9 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({ route }) => {
     color: colors.primary,
   };
 
-  const toggleDrawer = () => {
-    navigation.dispatch(DrawerActions.toggleDrawer());
-  };
-
-  const addNote = (route: RouteProp<ParamListBase, string>) => {
-    navigation.navigate("HomeNavigator", {
-      screen: "Notes",
-      params: {
-        add: true,
-        bookId: (route.params as RouteParams).bookId,
-      },
-    });
-  };
+  const toggleDrawer = () => navigation.toggleDrawer();
+  const addNote = (route: RouteProp<ParamListBase, string>) =>
+    navigation.goToAddScreen("Notes", (route.params as RouteParams).bookId);
 
   return (
     <SafeAreaView
@@ -111,6 +92,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 1,
     elevation: 8,
+    justifyContent: "space-between",
   },
   title: {
     fontWeight: "bold",

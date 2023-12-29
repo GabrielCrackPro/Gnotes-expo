@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Book } from "../models/Note";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { useTheme, Drawer, IconButton, Icon } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
 import { DrawerNavigation } from "../models/navigation";
 import { getBooks } from "../utils/books";
+import { useNavigation } from "../hooks/useNavigation";
 
 const BookList: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
-  const navigation = useNavigation<DrawerNavigation>();
+  const navigation = useNavigation();
   const { colors } = useTheme();
 
   const goToNotes = (bookId: string) => {
@@ -19,25 +19,9 @@ const BookList: React.FC = () => {
     });
   };
 
-  const goBack = () => {
-    navigation.navigate("HomeNavigator", {
-      screen: "Home",
-      params: { add: false },
-    });
-  };
-
-  const goToSettings = () => {
-    navigation.navigate("HomeNavigator", {
-      screen: "Settings",
-    });
-  };
-
-  const addBook = () => {
-    navigation.navigate("HomeNavigator", {
-      screen: "Home",
-      params: { add: true },
-    });
-  };
+  const goBack = () => navigation.goHome();
+  const goToSettings = () => navigation.goToSettings();
+  const addBook = () => navigation.goToAddScreen("Home");
 
   useEffect(() => {
     const loadBooks = async () => {

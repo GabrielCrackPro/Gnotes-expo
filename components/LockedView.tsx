@@ -2,12 +2,11 @@ import { StyleProp, StyleSheet, TextStyle, View } from "react-native";
 import React from "react";
 import { IconButton, Text, useTheme } from "react-native-paper";
 import useAuth from "../hooks/useAuth";
-import { useNavigation } from "@react-navigation/native";
-import { DrawerNavigation } from "../models/navigation";
+import { useNavigation } from "../hooks/useNavigation";
 
 const LockedView: React.FC = () => {
   const { colors } = useTheme();
-  const navigation = useNavigation<DrawerNavigation>();
+  const navigation = useNavigation();
 
   const { checkAuth } = useAuth({
     authMessage: "Re-authentificate",

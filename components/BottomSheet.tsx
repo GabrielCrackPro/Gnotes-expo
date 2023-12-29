@@ -2,35 +2,31 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   View,
   StyleSheet,
-  Dimensions,
   TextStyle,
   StyleProp,
   ViewStyle,
 } from "react-native";
 import BottomSheet, { BottomSheetTextInput } from "@gorhom/bottom-sheet";
-import { useNavigation } from "@react-navigation/native";
 import { Book, Note } from "../models/Note";
 import { createBook, getBookFromId } from "../utils/books";
 import { DrawerNavigation } from "../models/navigation";
 import { createNote } from "../utils/notes";
 import {
   generateUuid,
-  getMissingFields,
   getMissingFieldsString,
   validateFormFields,
 } from "../utils/common";
 import {
   useTheme,
   Button,
-  Chip,
   IconButton,
-  Checkbox,
   Text,
   Snackbar,
 } from "react-native-paper";
 import Animated from "react-native-reanimated";
 import RichEditor from "./RichEditor";
 import { RichEditor as RNRichEditor } from "react-native-pell-rich-editor";
+import { useNavigation } from "../hooks/useNavigation";
 
 type BottomSheetStyle = StyleProp<
   Animated.AnimateStyle<
@@ -70,7 +66,8 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
   const editorRef = useRef<RNRichEditor>(null);
 
   const { colors } = useTheme();
-  const navigation = useNavigation<DrawerNavigation>();
+
+  const navigation = useNavigation();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ["70%", "100%"], []);
@@ -118,7 +115,6 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
     if (validateFormFields("book", book)) {
       await createBook(book).then(() => {
         cleatFields();
-        navigation.navigate("Home", { add: false });
         navigation.toggleDrawer();
       });
     } else {
@@ -138,7 +134,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
 
     if (validateFormFields("note", note)) {
       await createNote(note).then(() => {
-        navigation.navigate("Notes", { bookId: note.bookId });
+        navigation.goToNotes(note.bookId);
       });
     } else {
       setSnackbarVisible(true);
@@ -146,13 +142,10 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
     }
   };
 
-  const dissmissSheet = (screen: "Home" | "Notes", params: any) => {
+  const dissmissSheet = (screen: "Home" | "Notes", bookId?: string) => {
     cleatFields();
     bottomSheetRef.current?.close();
-    navigation.navigate("HomeNavigator", {
-      screen: screen,
-      params: params,
-    });
+    navigation.dissmissBottomSheet(screen, bookId);
   };
 
   const bottomSheetStyle: BottomSheetStyles = {
@@ -188,7 +181,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                   <Button
                     style={{ marginRight: 10 }}
                     mode="contained-tonal"
-                    onPress={() => dissmissSheet("Home", { add: false })}
+                    onPress={() => dissmissSheet("Home")}
                   >
                     Cancel
                   </Button>
@@ -236,9 +229,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                   <Button
                     mode="contained-tonal"
                     style={{ marginRight: 10 }}
-                    onPress={() =>
-                      dissmissSheet("Notes", { add: false, bookId: book?.id })
-                    }
+                    onPress={() => dissmissSheet("Notes", book?.id)}
                   >
                     Cancel
                   </Button>

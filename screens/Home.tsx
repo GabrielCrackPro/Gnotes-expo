@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { useTheme, Text, Icon } from "react-native-paper";
 import BottomSheetComponent from "../components/BottomSheet";
 import { Book, Note } from "../models/Note";
 import DeleteDialog from "../components/DeleteDialog";
+import { useNavigation } from "../hooks/useNavigation";
 
 interface RouteParams {
   add: boolean;
@@ -77,12 +78,7 @@ const Home: React.FC = () => {
                 setDialogVisible(false);
               } else {
                 setDialogVisible(false);
-                navigation.navigate("HomeNavigator", {
-                  screen: "Notes",
-                  params: {
-                    bookId: noteToDelete?.bookId,
-                  },
-                });
+                navigation.goToNotes(noteToDelete?.bookId as string);
               }
             }}
           />

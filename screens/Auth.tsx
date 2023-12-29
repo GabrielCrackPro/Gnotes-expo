@@ -1,24 +1,18 @@
 import React, { useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { DrawerNavigation } from "../models/navigation";
 import useAuth from "../hooks/useAuth";
 import LockedView from "../components/LockedView";
 import { useAppContext } from "../AppContext";
+import { useNavigation } from "../hooks/useNavigation";
 
 const Auth = () => {
-  const navigation = useNavigation<DrawerNavigation>();
+  const navigation = useNavigation();
   const { isAppLocked } = useAppContext();
   const { requestAuth } = useAuth({
     navigation,
     authMessage: "Authentificate",
   });
 
-  const redirectToHome = () => {
-    navigation.navigate("HomeNavigator", {
-      screen: "Home",
-      params: { add: false },
-    });
-  };
+  const redirectToHome = () => navigation.goHome();
 
   useEffect(() => {
     if (isAppLocked) {
