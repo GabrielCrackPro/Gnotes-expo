@@ -1,0 +1,52 @@
+import React, { useCallback } from "react";
+import { View, ViewProps } from "react-native";
+import {
+  useNavigation,
+  useIsFocused,
+  useFocusEffect,
+} from "@react-navigation/native";
+import { DrawerNavigation } from "../models/navigation";
+import useAuth from "../hooks/useAuth";
+import LockedView from "./LockedView";
+
+interface AuthViewProps extends ViewProps {
+  children: React.ReactNode;
+  authMessage: string;
+  authEnabled: boolean;
+}
+
+const AuthView: React.FC<AuthViewProps> = ({
+  children,
+  authEnabled,
+  authMessage,
+  ...props
+}) => {
+  const navigation = useNavigation<DrawerNavigation>();
+  const isFocused = useIsFocused();
+
+  const { checkAuth, isAuthenticated } = useAuth({
+    navigation,
+    authMessage,
+  });
+
+  const handleScreenFocus = useCallback(() => {
+    if (authEnabled && isFocused) {
+      checkAuth();
+    }
+  }, [authEnabled, isFocused]);
+
+  useFocusEffect(
+    useCallback(() => {
+      handleScreenFocus();
+      return () => {};
+    }, [handleScreenFocus]),
+  );
+
+  return (authEnabled && isAuthenticated) || !authEnabled ? (
+    <View {...props}>{children}</View>
+  ) : (
+    <LockedView />
+  );
+};
+
+export default AuthView;
