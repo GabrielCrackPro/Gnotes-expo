@@ -35,10 +35,16 @@ const BookList: React.FC = () => {
     <>
       <DrawerContentScrollView>
         <Drawer.Section>
-          <Drawer.Item label="Home" icon="home" onPress={() => goBack()} />
+          <Drawer.Item
+            label="Home"
+            icon="home"
+            theme={{ colors: { onSurfaceVariant: colors.primary } }}
+            onPress={() => goBack()}
+          />
           <Drawer.Item
             label="Settings"
             icon="cog"
+            theme={{ colors: { onSurfaceVariant: colors.primary } }}
             onPress={() => goToSettings()}
           />
         </Drawer.Section>
@@ -49,6 +55,7 @@ const BookList: React.FC = () => {
                 key={index}
                 label={book.title}
                 icon="book"
+                theme={{ colors: { onSurfaceVariant: colors.primary } }}
                 style={{
                   backgroundColor: book.color,
                   marginVertical: 10,
@@ -61,7 +68,7 @@ const BookList: React.FC = () => {
                     )}
                     <IconButton
                       icon="delete"
-                      iconColor={colors.error}
+                      iconColor={colors.primary}
                       size={18}
                       onPress={() => {
                         navigation.navigate("HomeNavigator", {
@@ -78,10 +85,19 @@ const BookList: React.FC = () => {
               />
             ))
           ) : (
-            <Drawer.Item icon="bookshelf" label="No books" />
+            <Drawer.Item
+              icon="bookshelf"
+              theme={{ colors: { onSurfaceVariant: colors.primary } }}
+              label="No books"
+            />
           )}
         </Drawer.Section>
-        <Drawer.Item icon="plus" label="Create Book" onPress={addBook} />
+        <Drawer.Item
+          icon="plus"
+          theme={{ colors: { onSurfaceVariant: colors.primary } }}
+          label="Create Book"
+          onPress={addBook}
+        />
       </DrawerContentScrollView>
     </>
   );

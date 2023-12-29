@@ -50,7 +50,7 @@ const RichEditor: React.ForwardRefRenderFunction<
         ref={ref}
         placeholder={placeholder}
         editorStyle={{
-          backgroundColor: colors.background,
+          backgroundColor: colors.surfaceVariant,
           color: colors.onBackground,
           placeholderColor: colors.placeholder,
         }}

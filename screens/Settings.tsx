@@ -23,7 +23,7 @@ const Settings: React.FC = () => {
   });
 
   const defaultSettingsItemStyle: StyleProp<ViewStyle> = {
-    backgroundColor: colors.onSurface,
+    backgroundColor: colors.surface,
   };
   const defaultSettingsTextStyle: StyleProp<TextStyle> = {
     color: colors.text,

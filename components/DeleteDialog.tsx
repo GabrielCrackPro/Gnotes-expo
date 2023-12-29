@@ -33,23 +33,33 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
       dismissable={false}
       dismissableBackButton={false}
       onDismiss={onDismiss}
+      theme={{ colors: { elevation: { level3: colors.background } } }}
     >
-      <Dialog.Title style={{ color: colors.error, fontWeight: "bold" }}>
-        Delete {type === "book" ? "book" : "note"}
+      <Dialog.Icon icon="alert" size={30} color={colors.error} />
+      <Dialog.Title>
+        <Text style={{ color: colors.error, textAlign: "center" }}>
+          Delete {type === "book" ? "book" : "note"} {item?.title}
+        </Text>
       </Dialog.Title>
       <Dialog.Content>
-        <Text variant="bodyLarge" style={{ color: colors.text }}>
-          {`Do you want to delete ${item?.title}?`}
-        </Text>
-        <Text variant="bodyMedium" style={{ color: colors.text }}>
+        <Text
+          variant="bodyLarge"
+          style={{ color: colors.text, textAlign: "center" }}
+        >
           {type === "book"
             ? "The book and all its notes will be permanently lost"
-            : "This action cannot be undone"}
+            : "This action can't be undone"}
         </Text>
       </Dialog.Content>
       <Dialog.Actions>
-        <Button onPress={onDismiss}>Cancel</Button>
-        <Button textColor={colors.error} onPress={handleDelete}>
+        <Button textColor={colors.text} onPress={onDismiss}>
+          Cancel
+        </Button>
+        <Button
+          theme={{ colors: { primary: colors.error } }}
+          mode="contained"
+          onPress={handleDelete}
+        >
           Delete
         </Button>
       </Dialog.Actions>

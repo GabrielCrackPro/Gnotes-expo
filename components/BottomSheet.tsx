@@ -87,7 +87,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
   const [errors, setErrors] = useState("");
 
   const defaultInputStyles: StyleProp<TextStyle> = {
-    backgroundColor: colors.background,
+    backgroundColor: colors.surfaceVariant,
   };
 
   useEffect(() => {
@@ -153,10 +153,10 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
       flex: 1,
     },
     container: {
-      flex: 1,
+      backgroundColor: colors.surfaceVariant,
     },
     background: {
-      backgroundColor: colors.onSurface,
+      backgroundColor: colors.surface,
     },
   };
 
@@ -170,7 +170,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
           containerStyle={bottomSheetStyle.container}
           backgroundStyle={bottomSheetStyle.background}
           handleIndicatorStyle={{ backgroundColor: colors.primary }}
-          keyboardBehavior="interactive"
+          keyboardBehavior="extend"
         >
           <View
             style={[styles.contentContainer, { backgroundColor: colors.card }]}
@@ -180,13 +180,13 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                 <View style={[styles.row]}>
                   <Button
                     style={{ marginRight: 10 }}
-                    mode="contained-tonal"
+                    mode="text"
                     onPress={() => dissmissSheet("Home")}
                   >
                     Cancel
                   </Button>
                   <Button mode="contained" onPress={addBook}>
-                    Add new book
+                    Add book
                   </Button>
                 </View>
                 <View style={styles.row}>
@@ -227,7 +227,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
               <>
                 <View style={styles.row}>
                   <Button
-                    mode="contained-tonal"
+                    mode="text"
                     style={{ marginRight: 10 }}
                     onPress={() => dissmissSheet("Notes", book?.id)}
                   >
