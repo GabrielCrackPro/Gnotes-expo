@@ -275,6 +275,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                     icon={insertHtml ? "language-html5" : "format-text"}
                     iconColor={colors.primary}
                     onPress={() => setInsertHtml((prev) => !prev)}
+                    animated
                   />
                 </View>
                 {insertHtml ? (

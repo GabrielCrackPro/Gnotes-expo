@@ -5,20 +5,12 @@ import { useTheme, Drawer, IconButton, Icon } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerNavigation } from "../models/navigation";
 import { getBooks } from "../utils/books";
-import { clearStorage } from "../utils/storage";
-import { useAppContext } from "../AppContext";
-import useAuth from "../hooks/useAuth";
 
 const BookList: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
   const navigation = useNavigation<DrawerNavigation>();
   const { colors } = useTheme();
-  const { isAppLocked, toggleAppLocked } = useAppContext();
-  const { requestAuth } = useAuth({
-    navigation,
-    authMessage: "Please verify your identity",
-  });
 
   const goToNotes = (bookId: string) => {
     navigation.navigate("HomeNavigator", {
@@ -34,18 +26,17 @@ const BookList: React.FC = () => {
     });
   };
 
+  const goToSettings = () => {
+    navigation.navigate("HomeNavigator", {
+      screen: "Settings",
+    });
+  };
+
   const addBook = () => {
     navigation.navigate("HomeNavigator", {
       screen: "Home",
       params: { add: true },
     });
-  };
-
-  const handleToggleAppLocked = () => {
-    requestAuth(
-      { authMessage: "Verify your identity to continue" },
-      toggleAppLocked,
-    );
   };
 
   useEffect(() => {
@@ -61,6 +52,11 @@ const BookList: React.FC = () => {
       <DrawerContentScrollView>
         <Drawer.Section>
           <Drawer.Item label="Home" icon="home" onPress={() => goBack()} />
+          <Drawer.Item
+            label="Settings"
+            icon="cog"
+            onPress={() => goToSettings()}
+          />
         </Drawer.Section>
         <Drawer.Section>
           {books.length ? (
@@ -102,23 +98,6 @@ const BookList: React.FC = () => {
           )}
         </Drawer.Section>
         <Drawer.Item icon="plus" label="Create Book" onPress={addBook} />
-        {books.length ? (
-          <Drawer.Item
-            icon="delete"
-            label="Clear Books"
-            onPress={() =>
-              clearStorage(() => {
-                navigation.navigate("Home", { add: false });
-                navigation.openDrawer();
-              })
-            }
-          />
-        ) : null}
-        <Drawer.Item
-          icon={isAppLocked ? "lock" : "lock-open-variant"}
-          label={isAppLocked ? "Unlock App" : "Lock App"}
-          onPress={handleToggleAppLocked}
-        />
       </DrawerContentScrollView>
     </>
   );
