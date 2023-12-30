@@ -81,7 +81,7 @@ const getMissingFieldsString = (
 };
 
 const containsMarkdown = (text: string) => {
-  const markdownRegExp = /[*#~`[\]!-]/;
+  const markdownRegExp = /[*#~`[\]!-_>|+`]/;
   return markdownRegExp.test(text);
 };
 

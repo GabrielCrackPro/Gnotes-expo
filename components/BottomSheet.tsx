@@ -155,7 +155,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
       zIndex: 30,
     },
     container: {
-      backgroundColor: colors.surfaceVariant,
+      backgroundColor: colors.background,
     },
     background: {
       backgroundColor: colors.surface,
@@ -179,7 +179,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
           >
             {content === "book" && (
               <>
-                <View style={[styles.row]}>
+                <View style={styles.buttonsRow}>
                   <Button
                     style={{ marginRight: 10 }}
                     mode="text"
@@ -227,7 +227,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
             )}
             {content === "note" && (
               <>
-                <View style={styles.row}>
+                <View style={styles.buttonsRow}>
                   <Button
                     mode="text"
                     style={{ marginRight: 10 }}
@@ -274,6 +274,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                 {insertMarkdown ? (
                   <MarkdownEditor
                     onMarkdownChange={(text: string) => setNoteBody(text)}
+                    editorStyles={styles.textArea}
                   />
                 ) : (
                   <BottomSheetTextInput
@@ -341,7 +342,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
+  },
+  buttonsRow: {
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-evenly",
+    marginBottom: 10,
   },
 });
 

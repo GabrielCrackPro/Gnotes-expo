@@ -7,41 +7,29 @@ import {
   ScrollView,
   StyleProp,
   TextStyle,
+  ViewStyle,
 } from "react-native";
 import { MarkdownView } from "react-native-markdown-view";
 import renderFormatButtons from "./utils/renderFormatButtons";
 import { IconButton, useTheme } from "react-native-paper";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { MarkdownFormat } from "./utils/Formats";
+import markdownStyles from "./utils/styles";
 
 interface MarkdownEditorProps {
   Formats?: MarkdownFormat[];
   showEditorPreview?: boolean;
+  editorStyles?: StyleProp<ViewStyle>;
   defaultValue?: string;
   onMarkdownChange: (text: string) => void;
   markdownButton?: () => React.ReactNode;
 }
 
-const markdownStyles = {
-  heading1: {
-    fontSize: 24,
-    color: "purple",
-  },
-  link: {
-    color: "pink",
-  },
-  mailTo: {
-    color: "orange",
-  },
-  text: {
-    color: "#555555",
-  },
-};
-
 const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
   Formats,
   defaultValue,
   showEditorPreview,
+  editorStyles,
   onMarkdownChange,
   markdownButton,
 }) => {
@@ -76,9 +64,14 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
 
   const renderPreview = () => {
     return (
-      <View style={[defaultInputStyles, styles.preview]}>
+      <View style={defaultInputStyles}>
         <ScrollView removeClippedSubviews>
-          <MarkdownView styles={markdownStyles}>
+          <MarkdownView
+            styles={{
+              ...markdownStyles,
+              link: { color: colors.primary, fontWeight: "bold" },
+            }}
+          >
             {text === "" ? "Preview" : text}
           </MarkdownView>
         </ScrollView>
@@ -88,7 +81,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
 
   const WrapperView = Platform.OS === "ios" ? KeyboardAvoidingView : View;
   return (
-    <WrapperView behavior="padding" style={styles.screen}>
+    <WrapperView behavior="padding" style={editorStyles}>
       <BottomSheetTextInput
         style={[defaultInputStyles, styles.composeText, { color: colors.text }]}
         multiline
@@ -105,6 +98,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
         <IconButton
           icon={showPreview ? "eye-off" : "eye"}
           iconColor={colors.primary}
+          size={15}
           onPress={convertMarkdown}
         />
 
@@ -137,13 +131,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  inlinePadding: {
-    padding: 8,
-  },
-  preview: {},
-  screen: {
-    height: 100,
   },
 });
 

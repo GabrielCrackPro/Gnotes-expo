@@ -7,6 +7,7 @@ import { getBookFromId } from "../utils/books";
 import AuthView from "../components/AuthView";
 import NotesList from "../components/NotesList";
 import BottomSheetComponent from "../components/BottomSheet";
+import * as WebBrowser from "expo-web-browser";
 
 interface RouteParams {
   bookId: string;
@@ -33,13 +34,15 @@ const Notes: React.FC = () => {
     getNotes();
   }, [notes]);
 
+  const handleLink = (link: string) => WebBrowser.openBrowserAsync(link);
+
   return (
     <View style={styles.notes}>
       <AuthView
         authEnabled={(book?.locked as boolean) || false}
         authMessage={`${book?.title} is locked`}
       >
-        <NotesList notes={notes} />
+        {!add && <NotesList notes={notes} onLinkPress={handleLink} />}
       </AuthView>
       <BottomSheetComponent visible={add} content="note" id={bookId} />
     </View>
