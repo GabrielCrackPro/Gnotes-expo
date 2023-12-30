@@ -13,7 +13,7 @@ const NotesList: React.FC<NotesListProps> = ({ notes, onLinkPress }) => {
   return (
     <View style={styles.noteList}>
       <FlatList
-        inverted
+        inverted={notes.length > 0}
         data={notes}
         renderItem={({ item }) => (
           <NoteItem note={item} onLinkPress={onLinkPress} />

@@ -10,14 +10,11 @@ const EmptyList = () => {
       <View>
         <Text
           variant="headlineLarge"
-          style={[styles.text, { color: colors.onPrimary }]}
+          style={[styles.text, { color: colors.text }]}
         >
           No notes
         </Text>
-        <Text
-          variant="bodyLarge"
-          style={[styles.text, { color: colors.onPrimary }]}
-        >
+        <Text variant="bodyLarge" style={[styles.text, { color: colors.text }]}>
           Press the + symbol to add new notes
         </Text>
       </View>

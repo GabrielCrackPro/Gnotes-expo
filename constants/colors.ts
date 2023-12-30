@@ -38,6 +38,7 @@ const lightThemeColors = {
   shadow: "#E6E6FA",
   scrim: "#D8BFD8",
   backdrop: "#808080",
+  placeholder: "#CCCCCC",
 };
 
 const darkThemeColors = {
