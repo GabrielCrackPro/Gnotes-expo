@@ -14,6 +14,7 @@ const NotesList: React.FC<NotesListProps> = ({ notes, onLinkPress }) => {
     <View style={styles.noteList}>
       <FlatList
         inverted={notes.length > 0}
+        showsVerticalScrollIndicator={false}
         data={notes}
         renderItem={({ item }) => (
           <NoteItem note={item} onLinkPress={onLinkPress} />

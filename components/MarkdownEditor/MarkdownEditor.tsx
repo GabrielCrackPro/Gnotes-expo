@@ -14,7 +14,7 @@ import renderFormatButtons from "./utils/renderFormatButtons";
 import { IconButton, useTheme } from "react-native-paper";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { MarkdownFormat } from "./utils/Formats";
-import markdownStyles from "./utils/styles";
+import useMarkdownTheme from "../../hooks/useMarkdownTheme";
 
 interface MarkdownEditorProps {
   Formats?: MarkdownFormat[];
@@ -34,6 +34,8 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
   markdownButton,
 }) => {
   const { colors } = useTheme();
+  const { markdownStyles } = useMarkdownTheme();
+
   const [text, setText] = useState(defaultValue || "");
   const [selection, setSelection] = useState({ start: 0, end: 0 });
   const [showPreview, setShowPreview] = useState(showEditorPreview ?? false);
@@ -66,12 +68,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
     return (
       <View style={defaultInputStyles}>
         <ScrollView removeClippedSubviews>
-          <MarkdownView
-            styles={{
-              ...markdownStyles,
-              link: { color: colors.primary, fontWeight: "bold" },
-            }}
-          >
+          <MarkdownView styles={markdownStyles}>
             {text === "" ? "Preview" : text}
           </MarkdownView>
         </ScrollView>

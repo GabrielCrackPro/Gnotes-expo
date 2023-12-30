@@ -14,6 +14,7 @@ import { useNavigation } from "../hooks/useNavigation";
 import { containsMarkdown } from "../utils/common";
 import { MarkdownView } from "react-native-markdown-view";
 import markdownStyles from "./MarkdownEditor/utils/styles";
+import useMarkdownTheme from "../hooks/useMarkdownTheme";
 
 interface NoteProps {
   note: Note;
@@ -23,6 +24,7 @@ interface NoteProps {
 const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
   const navigation = useNavigation();
   const { colors } = useTheme();
+  const { markdownStyles } = useMarkdownTheme();
 
   const [markdown, _] = useState(containsMarkdown(note.body));
   const [changeTextColor, setChangeTextColor] = useState("");
@@ -52,13 +54,7 @@ const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
           {markdown ? (
             <View>
               <ScrollView removeClippedSubviews>
-                <MarkdownView
-                  onLinkPress={onLinkPress}
-                  styles={{
-                    ...markdownStyles,
-                    link: { color: colors.primary },
-                  }}
-                >
+                <MarkdownView onLinkPress={onLinkPress} styles={markdownStyles}>
                   {note.body}
                 </MarkdownView>
               </ScrollView>
