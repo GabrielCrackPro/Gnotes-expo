@@ -9,7 +9,6 @@ import {
 import BottomSheet, { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { Book, Note } from "../models/Note";
 import { createBook, getBookFromId } from "../utils/books";
-import { DrawerNavigation } from "../models/navigation";
 import { createNote } from "../utils/notes";
 import {
   generateUuid,
@@ -27,6 +26,7 @@ import Animated from "react-native-reanimated";
 import RichEditor from "./RichEditor";
 import { RichEditor as RNRichEditor } from "react-native-pell-rich-editor";
 import { useNavigation } from "../hooks/useNavigation";
+import * as Haptics from "expo-haptics";
 
 type BottomSheetStyle = StyleProp<
   Animated.AnimateStyle<
@@ -116,10 +116,12 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
       await createBook(book).then(() => {
         cleatFields();
         navigation.toggleDrawer();
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       });
     } else {
       setSnackbarVisible(true);
       setErrors(getMissingFieldsString("book", book));
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
   };
 

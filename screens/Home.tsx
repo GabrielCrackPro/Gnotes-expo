@@ -6,6 +6,7 @@ import BottomSheetComponent from "../components/BottomSheet";
 import { Book, Note } from "../models/Note";
 import DeleteDialog from "../components/DeleteDialog";
 import { useNavigation } from "../hooks/useNavigation";
+import * as Haptics from "expo-haptics";
 
 interface RouteParams {
   add: boolean;
@@ -37,6 +38,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (openDialog && (bookToDelete || noteToDelete)) {
       setDialogVisible(true);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
     }
   }, [openDialog, bookToDelete, noteToDelete]);
 

@@ -3,6 +3,7 @@ import { Dialog, Button, Text, useTheme } from "react-native-paper";
 import { Book, Note } from "../models/Note";
 import { deleteNote } from "../utils/notes";
 import { deleteBook } from "../utils/books";
+import * as Haptics from "expo-haptics";
 
 interface DeleteDialogProps {
   item?: Note | Book;
@@ -25,6 +26,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
     } else {
       deleteBook(item as Book).then(() => onDismiss());
     }
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
   };
 
   return (

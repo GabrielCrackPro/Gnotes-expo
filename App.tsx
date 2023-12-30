@@ -5,8 +5,12 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppContext from "./AppContext";
 import { useDarkMode } from "./hooks/useDarkMode";
 import { PaperProvider } from "react-native-paper";
-import { StatusBar } from "expo-status-bar";
+import * as StatusBar from "expo-status-bar";
 import { useAppLocked } from "./hooks/useAppLocked";
+import { darkThemeColors, lightThemeColors } from "./constants/colors";
+import * as NavigationBar from "expo-navigation-bar";
+import { useEffect } from "react";
+import { Platform } from "react-native";
 
 export default function App() {
   const { isDark, toggleDark } = useDarkMode();
@@ -19,11 +23,24 @@ export default function App() {
     toggleDark,
   };
 
+  useEffect(() => {
+    if (Platform.OS === "android") {
+      NavigationBar.setBackgroundColorAsync(
+        isDark ? darkThemeColors.background : lightThemeColors.background,
+      );
+      NavigationBar.setButtonStyleAsync(isDark ? "light" : "dark");
+      StatusBar.setStatusBarBackgroundColor(
+        isDark ? darkThemeColors.background : lightThemeColors.background,
+        false,
+      );
+    }
+  }, [isDark]);
+
   return (
     <AppContext.Provider value={globals}>
       <PaperProvider theme={isDark ? darkTheme : lightTheme}>
         <SafeAreaProvider>
-          <StatusBar animated style={isDark ? "light" : "dark"} />
+          <StatusBar.StatusBar animated style={isDark ? "light" : "dark"} />
           <NavigationContainer theme={isDark ? darkTheme : lightTheme}>
             <Navigation />
           </NavigationContainer>
