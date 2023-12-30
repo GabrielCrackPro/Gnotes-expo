@@ -6,7 +6,10 @@ import {
   StyleProp,
   ViewStyle,
 } from "react-native";
-import BottomSheet, { BottomSheetTextInput } from "@gorhom/bottom-sheet";
+import BottomSheet, {
+  BottomSheetScrollView,
+  BottomSheetTextInput,
+} from "@gorhom/bottom-sheet";
 import { Book, Note } from "../models/Note";
 import { createBook, getBookFromId } from "../utils/books";
 import { createNote } from "../utils/notes";
@@ -66,7 +69,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
   const navigation = useNavigation();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ["70%", "100%"], []);
+  const snapPoints = useMemo(() => ["100%", "200%"], []);
 
   const [bookTitle, setBookTitle] = useState("");
   const [bookColor, setBookColor] = useState("");
@@ -171,7 +174,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
           handleIndicatorStyle={{ backgroundColor: colors.primary }}
           keyboardBehavior="extend"
         >
-          <View
+          <BottomSheetScrollView
             style={[styles.contentContainer, { backgroundColor: colors.card }]}
           >
             {content === "book" && (
@@ -286,7 +289,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                 )}
               </>
             )}
-          </View>
+          </BottomSheetScrollView>
         </BottomSheet>
         <Snackbar
           visible={snackbarVisible}
@@ -316,8 +319,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
     marginTop: 23,
   },
   input: {
