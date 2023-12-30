@@ -7,6 +7,7 @@ import { Book, Note } from "../models/Note";
 import DeleteDialog from "../components/DeleteDialog";
 import { useNavigation } from "../hooks/useNavigation";
 import * as Haptics from "expo-haptics";
+import MarkdownEditor from "../components/MarkdownEditor";
 
 interface RouteParams {
   add: boolean;

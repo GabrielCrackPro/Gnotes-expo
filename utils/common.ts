@@ -80,4 +80,14 @@ const getMissingFieldsString = (
   } missing.`;
 };
 
-export { generateUuid, validateFormFields, getMissingFieldsString };
+const containsMarkdown = (text: string) => {
+  const markdownRegExp = /[*#~`[\]!-]/;
+  return markdownRegExp.test(text);
+};
+
+export {
+  generateUuid,
+  validateFormFields,
+  getMissingFieldsString,
+  containsMarkdown,
+};

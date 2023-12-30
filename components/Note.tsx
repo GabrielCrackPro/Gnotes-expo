@@ -1,4 +1,5 @@
 import {
+  ScrollView,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -10,6 +11,8 @@ import { useTheme, IconButton, Text, Icon } from "react-native-paper";
 import WebView from "react-native-webview";
 import { useState } from "react";
 import { useNavigation } from "../hooks/useNavigation";
+import { containsMarkdown } from "../utils/common";
+import { MarkdownView } from "react-native-markdown-view";
 
 interface NoteProps {
   note: Note;
@@ -19,15 +22,31 @@ const NoteItem: React.FC<NoteProps> = ({ note }) => {
   const navigation = useNavigation();
   const { colors } = useTheme();
 
-  const [containsHtml, _] = useState(note.body.includes("<"));
+  const [markdown, _] = useState(containsMarkdown(note.body));
   const [changeTextColor, setChangeTextColor] = useState("");
 
   const defaultNoteItemStyles: StyleProp<ViewStyle> = {
-    backgroundColor: colors.onSurface,
+    backgroundColor: colors.surfaceVariant,
     borderColor: colors.background,
   };
   const defaultNoteBodyStyles: StyleProp<TextStyle> = {
     color: colors.text,
+  };
+
+  const markdownStyles = {
+    heading1: {
+      fontSize: 24,
+      color: "purple",
+    },
+    link: {
+      color: "pink",
+    },
+    mailTo: {
+      color: "orange",
+    },
+    text: {
+      color: colors.text,
+    },
   };
   return (
     <>
@@ -38,23 +57,17 @@ const NoteItem: React.FC<NoteProps> = ({ note }) => {
               {note.title}
             </Text>
             <Icon
-              source={containsHtml ? "language-html5" : "format-text"}
+              source={markdown ? "language-markdown" : "format-text"}
               color={colors.primary}
               size={22}
             />
           </View>
-          {containsHtml ? (
-            <WebView
-              source={{ html: note.body }}
-              minimumFontSize={18}
-              textZoom={200}
-              scrollEnabled={false}
-              injectedJavaScript={changeTextColor}
-              style={{
-                height: 50,
-                backgroundColor: colors.onSurface,
-              }}
-            />
+          {markdown ? (
+            <View>
+              <ScrollView removeClippedSubviews>
+                <MarkdownView styles={markdownStyles}>{note.body}</MarkdownView>
+              </ScrollView>
+            </View>
           ) : (
             <Text variant="bodyMedium" style={defaultNoteBodyStyles}>
               {note.body}

@@ -23,10 +23,9 @@ import {
   Snackbar,
 } from "react-native-paper";
 import Animated from "react-native-reanimated";
-import RichEditor from "./RichEditor";
-import { RichEditor as RNRichEditor } from "react-native-pell-rich-editor";
 import { useNavigation } from "../hooks/useNavigation";
 import * as Haptics from "expo-haptics";
+import MarkdownEditor from "./MarkdownEditor/MarkdownEditor";
 
 type BottomSheetStyle = StyleProp<
   Animated.AnimateStyle<
@@ -63,10 +62,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
 }) => {
   const bookColors = ["#EF9A9A", "#64B5F6", "#81C784", "#FFD54F"];
 
-  const editorRef = useRef<RNRichEditor>(null);
-
   const { colors } = useTheme();
-
   const navigation = useNavigation();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -81,7 +77,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
   const [noteTitle, setNoteTitle] = useState("");
   const [noteBody, setNoteBody] = useState("");
 
-  const [insertHtml, setInsertHtml] = useState(false);
+  const [insertMarkdown, setInsertMarkdown] = useState(false);
 
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [errors, setErrors] = useState("");
@@ -102,6 +98,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
     setBookTitle("");
     setBookColor("");
     setBookLocked(false);
+    setInsertMarkdown(false);
   };
 
   const addBook = async () => {
@@ -152,7 +149,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
 
   const bottomSheetStyle: BottomSheetStyles = {
     main: {
-      flex: 1,
+      zIndex: 30,
     },
     container: {
       backgroundColor: colors.surfaceVariant,
@@ -265,18 +262,15 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                     onChangeText={(text: string) => setNoteTitle(text)}
                   />
                   <IconButton
-                    icon={insertHtml ? "language-html5" : "format-text"}
+                    icon={insertMarkdown ? "language-markdown" : "format-text"}
                     iconColor={colors.primary}
-                    onPress={() => setInsertHtml((prev) => !prev)}
+                    onPress={() => setInsertMarkdown((prev) => !prev)}
                     animated
                   />
                 </View>
-                {insertHtml ? (
-                  <RichEditor
-                    style={[defaultInputStyles]}
-                    ref={editorRef}
-                    placeholder="Note Body"
-                    onChange={(text: string) => setNoteBody(text)}
+                {insertMarkdown ? (
+                  <MarkdownEditor
+                    onMarkdownChange={(text: string) => setNoteBody(text)}
                   />
                 ) : (
                   <BottomSheetTextInput
@@ -323,6 +317,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     padding: 20,
     justifyContent: "center",
+    alignItems: "center",
     marginTop: 23,
   },
   input: {
