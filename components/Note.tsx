@@ -8,13 +8,12 @@ import {
 } from "react-native";
 import { Note } from "../models/Note";
 import { useTheme, IconButton, Text, Icon } from "react-native-paper";
-import WebView from "react-native-webview";
 import { useState } from "react";
 import { useNavigation } from "../hooks/useNavigation";
-import { containsMarkdown } from "../utils/common";
 import { MarkdownView } from "react-native-markdown-view";
-import markdownStyles from "./MarkdownEditor/utils/styles";
 import useMarkdownTheme from "../hooks/useMarkdownTheme";
+import { shareNote } from "../utils/notes";
+import { containsMarkdown } from "../utils/common";
 
 interface NoteProps {
   note: Note;
@@ -27,7 +26,6 @@ const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
   const { markdownStyles } = useMarkdownTheme();
 
   const [markdown, _] = useState(containsMarkdown(note.body));
-  const [changeTextColor, setChangeTextColor] = useState("");
 
   const defaultNoteItemStyles: StyleProp<ViewStyle> = {
     backgroundColor: colors.surfaceVariant,
@@ -71,6 +69,12 @@ const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
           </Text>
         </View>
         <View style={styles.row}>
+          <IconButton
+            icon="share-variant"
+            size={20}
+            iconColor={colors.primary}
+            onPress={() => shareNote(note)}
+          />
           <IconButton
             icon="pencil"
             size={20}

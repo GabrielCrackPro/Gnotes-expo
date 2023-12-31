@@ -1,3 +1,4 @@
+import { Share } from "react-native";
 import { Note } from "../models/Note";
 import { checkExists, getValue, setValue } from "./storage";
 
@@ -45,4 +46,14 @@ const deleteNote = async (note: Note): Promise<void> => {
   }
 };
 
-export { getNotes, getNotesByBook, createNote, deleteNote };
+const buildShareMessage = (note: Note): string =>
+  `Hey here's my note created using Gnotes\n${note.title}\n${note.body}`;
+
+const shareNote = async (note: Note) => {
+  await Share.share({
+    message: buildShareMessage(note),
+    title: "Share note",
+  });
+};
+
+export { getNotes, getNotesByBook, createNote, deleteNote, shareNote };
