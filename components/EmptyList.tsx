@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet, View } from "react-native";
 import React from "react";
 import { Icon, Text, useTheme } from "react-native-paper";
+import i18nConfig from "../locales/i18n-config";
 
 const EmptyList = () => {
   const { colors } = useTheme();
@@ -12,10 +13,10 @@ const EmptyList = () => {
           variant="headlineLarge"
           style={[styles.text, { color: colors.text }]}
         >
-          No notes
+          {i18nConfig.translate("emptyList.noNotes")}
         </Text>
         <Text variant="bodyLarge" style={[styles.text, { color: colors.text }]}>
-          Press the + symbol to add new notes
+          {i18nConfig.translate("emptyList.subNoNotes")}
         </Text>
       </View>
     </View>

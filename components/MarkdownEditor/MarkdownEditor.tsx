@@ -15,6 +15,7 @@ import { IconButton, useTheme } from "react-native-paper";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { MarkdownFormat } from "./utils/Formats";
 import useMarkdownTheme from "../../hooks/useMarkdownTheme";
+import i18nConfig from "../../locales/i18n-config";
 
 interface MarkdownEditorProps {
   Formats?: MarkdownFormat[];
@@ -68,8 +69,10 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
     return (
       <View style={defaultInputStyles}>
         <ScrollView removeClippedSubviews>
-          <MarkdownView styles={markdownStyles}>
-            {text === "" ? "Preview" : text}
+          <MarkdownView
+            styles={{ ...markdownStyles, text: { color: colors.placeholder } }}
+          >
+            {text === "" ? i18nConfig.translate("sheet.preview") : text}
           </MarkdownView>
         </ScrollView>
       </View>
@@ -86,7 +89,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
         onChangeText={changeText}
         onSelectionChange={onSelectionChange}
         value={text}
-        placeholder="Note body"
+        placeholder={i18nConfig.translate("sheet.body")}
         placeholderTextColor={colors.placeholder}
         ref={textInput}
         selection={selection}
@@ -111,7 +114,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
             },
           },
           Formats,
-          markdownButton,
+          markdownButton
         )}
       </View>
 

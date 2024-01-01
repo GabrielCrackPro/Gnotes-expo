@@ -12,6 +12,7 @@ import { DrawerActions } from "@react-navigation/native";
 import { useAppContext } from "../AppContext";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "../hooks/useNavigation";
+import i18nConfig from "../locales/i18n-config";
 
 const Settings: React.FC = () => {
   const { colors } = useTheme();
@@ -19,7 +20,7 @@ const Settings: React.FC = () => {
   const { isAppLocked, toggleAppLocked } = useAppContext();
   const { requestAuth } = useAuth({
     navigation: navigation,
-    authMessage: "Authenticate",
+    authMessage: i18nConfig.translate("auth.verify"),
   });
 
   const defaultSettingsItemStyle: StyleProp<ViewStyle> = {
@@ -35,7 +36,7 @@ const Settings: React.FC = () => {
 
   const handleAppLock = () => {
     requestAuth(
-      { authMessage: "Verify your identity to continue" },
+      { authMessage: i18nConfig.translate("auth.verify") },
       toggleAppLocked,
     );
   };
@@ -43,7 +44,7 @@ const Settings: React.FC = () => {
   return (
     <View>
       <List.Item
-        title="Delete notes and books"
+        title={i18nConfig.translate("settings.deleteAll")}
         style={[defaultSettingsItemStyle, styles.row]}
         titleStyle={[defaultSettingsTextStyle, styles.text]}
         centered
@@ -51,7 +52,11 @@ const Settings: React.FC = () => {
         onPress={handleClear}
       />
       <List.Item
-        title={isAppLocked ? "Unlock App" : "Lock App"}
+        title={
+          isAppLocked
+            ? i18nConfig.translate("settings.unlockApp")
+            : i18nConfig.translate("settings.lockApp")
+        }
         style={[defaultSettingsItemStyle, styles.row]}
         titleStyle={[defaultSettingsTextStyle, styles.text]}
         centered

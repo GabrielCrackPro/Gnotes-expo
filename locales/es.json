@@ -1,0 +1,46 @@
+{
+  "drawer": {
+    "home": "Inicio",
+    "settings": "Configuación",
+    "createBook": "Crear libro",
+    "noBooks": "No hay libros"
+  },
+  "home": {
+    "welcome": "Selecciona un libro del menu lateral para ver sus notas",
+    "subWelcome": "O crea uno nuevo presionando el simbolo +"
+  },
+  "sheet": {
+    "addBook": "Añadir libro",
+    "addNote": "Añadir nota",
+    "cancel": "Cancelar",
+    "name": "Titulo",
+    "body": "Contenido",
+    "preview": "Vista previa"
+  },
+  "emptyList": {
+    "noNotes": "No hay notas",
+    "subNoNotes": "Crea una nueva presionando el simbolo +"
+  },
+  "deleteDialog": {
+    "title": "Eliminar ",
+    "book": "El libro y todas sus notas se perderán",
+    "note": "Esto no se puede deshacer",
+    "cancel": "Cancelar",
+    "delete": "Eliminar"
+  },
+  "settings": {
+    "deleteAll": "Eliminar notas y libros",
+    "lockApp": "Bloquear aplicación",
+    "unlockApp": "Desbloquear aplicación"
+  },
+  "auth": {
+    "verify": "Verifica tu identidad para continuar",
+    "screenLocked": "Pantalla bloqueada",
+    "bookLocked": "está bloqueado",
+    "appLocked": "Aplicación bloqueada",
+    "reauth": "Presiona el icono del candado para re-autenticarte"
+  },
+  "share": {
+    "note": "Hey, aqui está mi nota creada usando Gnotes"
+  }
+}

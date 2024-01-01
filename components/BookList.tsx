@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Book } from "../models/Note";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { useTheme, Drawer, IconButton, Icon } from "react-native-paper";
-import { DrawerNavigation } from "../models/navigation";
 import { getBooks } from "../utils/books";
 import { useNavigation } from "../hooks/useNavigation";
+import i18nConfig from "../locales/i18n-config";
 
 const BookList: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -36,13 +36,13 @@ const BookList: React.FC = () => {
       <DrawerContentScrollView>
         <Drawer.Section>
           <Drawer.Item
-            label="Home"
+            label={i18nConfig.translate("drawer.home")}
             icon="home"
             theme={{ colors: { onSurfaceVariant: colors.primary } }}
             onPress={() => goBack()}
           />
           <Drawer.Item
-            label="Settings"
+            label={i18nConfig.translate("drawer.settings")}
             icon="cog"
             theme={{ colors: { onSurfaceVariant: colors.primary } }}
             onPress={() => goToSettings()}
@@ -88,14 +88,14 @@ const BookList: React.FC = () => {
             <Drawer.Item
               icon="bookshelf"
               theme={{ colors: { onSurfaceVariant: colors.primary } }}
-              label="No books"
+              label={i18nConfig.translate("drawer.noBooks")}
             />
           )}
         </Drawer.Section>
         <Drawer.Item
           icon="plus"
           theme={{ colors: { onSurfaceVariant: colors.primary } }}
-          label="Create Book"
+          label={i18nConfig.translate("drawer.createBook")}
           onPress={addBook}
         />
       </DrawerContentScrollView>

@@ -29,6 +29,7 @@ import Animated from "react-native-reanimated";
 import { useNavigation } from "../hooks/useNavigation";
 import * as Haptics from "expo-haptics";
 import MarkdownEditor from "./MarkdownEditor/MarkdownEditor";
+import i18nConfig from "../locales/i18n-config";
 
 type BottomSheetStyle = StyleProp<
   Animated.AnimateStyle<
@@ -121,7 +122,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
     } else {
       setSnackbarVisible(true);
       setErrors(getMissingFieldsString("book", book));
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      Haptics.placeholder(Haptics.NotificationFeedbackType.Error);
     }
   };
 
@@ -185,10 +186,10 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                     mode="text"
                     onPress={() => dissmissSheet("Home")}
                   >
-                    Cancel
+                    {i18nConfig.translate("sheet.cancel")}
                   </Button>
                   <Button mode="contained" onPress={addBook}>
-                    Add book
+                    {i18nConfig.translate("sheet.addBook")}
                   </Button>
                 </View>
                 <View style={styles.row}>
@@ -198,7 +199,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                       styles.input,
                       { color: colors.text },
                     ]}
-                    placeholder="Book name"
+                    placeholder={i18nConfig.translate("sheet.name")}
                     placeholderTextColor={colors.placeholder}
                     onChangeText={(text: string) => setBookTitle(text)}
                   />
@@ -233,10 +234,10 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                     style={{ marginRight: 10 }}
                     onPress={() => dissmissSheet("Notes", book?.id)}
                   >
-                    Cancel
+                    {i18nConfig.translate("sheet.cancel")}
                   </Button>
                   <Button mode="contained" onPress={addNote}>
-                    Add new note
+                    {i18nConfig.translate("sheet.addNote")}
                   </Button>
                 </View>
 
@@ -246,7 +247,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                     styles.input,
                     { color: colors.text },
                   ]}
-                  placeholder="Book Name"
+                  placeholder={i18nConfig.translate("sheet.name")}
                   placeholderTextColor={colors.placeholder}
                   editable={false}
                   value={book?.title}
@@ -260,7 +261,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                         color: colors.text,
                       },
                     ]}
-                    placeholder="Note name"
+                    placeholder={i18nConfig.translate("sheet.name")}
                     placeholderTextColor={colors.placeholder}
                     onChangeText={(text: string) => setNoteTitle(text)}
                   />
@@ -283,7 +284,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                       styles.textArea,
                       { color: colors.text },
                     ]}
-                    placeholder="Note body"
+                    placeholder={i18nConfig.translate("sheet.body")}
                     placeholderTextColor={colors.placeholder}
                     onChangeText={(text: string) => setNoteBody(text)}
                   />

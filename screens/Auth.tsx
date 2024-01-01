@@ -3,13 +3,14 @@ import useAuth from "../hooks/useAuth";
 import LockedView from "../components/LockedView";
 import { useAppContext } from "../AppContext";
 import { useNavigation } from "../hooks/useNavigation";
+import i18nConfig from "../locales/i18n-config";
 
 const Auth = () => {
   const navigation = useNavigation();
   const { isAppLocked } = useAppContext();
   const { requestAuth } = useAuth({
     navigation,
-    authMessage: "Authentificate",
+    authMessage: i18nConfig.translate("auth.appLocked"),
   });
 
   const redirectToHome = () => navigation.goHome();
@@ -17,7 +18,10 @@ const Auth = () => {
   useEffect(() => {
     if (isAppLocked) {
       requestAuth(
-        { authMessage: "App is locked", persistent: true },
+        {
+          authMessage: i18nConfig.translate("auth.appLocked"),
+          persistent: true,
+        },
         redirectToHome,
       );
     } else {

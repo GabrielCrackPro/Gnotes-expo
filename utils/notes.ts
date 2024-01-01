@@ -1,6 +1,7 @@
 import { Share } from "react-native";
 import { Note } from "../models/Note";
 import { checkExists, getValue, setValue } from "./storage";
+import i18nConfig from "../locales/i18n-config";
 
 const getNotes = async (): Promise<Note[]> => {
   try {
@@ -46,8 +47,12 @@ const deleteNote = async (note: Note): Promise<void> => {
   }
 };
 
-const buildShareMessage = (note: Note): string =>
-  `Hey here's my note created using Gnotes\n${note.title}\n${note.body}`;
+const buildShareMessage = (note: Note): string => {
+  const message = `${i18nConfig.translate("share.note")}\n${note.body}\n${
+    note.body
+  }`;
+  return message;
+};
 
 const shareNote = async (note: Note) => {
   await Share.share({

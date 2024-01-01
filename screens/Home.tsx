@@ -7,7 +7,7 @@ import { Book, Note } from "../models/Note";
 import DeleteDialog from "../components/DeleteDialog";
 import { useNavigation } from "../hooks/useNavigation";
 import * as Haptics from "expo-haptics";
-import MarkdownEditor from "../components/MarkdownEditor";
+import i18nConfig from "../locales/i18n-config";
 
 interface RouteParams {
   add: boolean;
@@ -57,13 +57,13 @@ const Home: React.FC = () => {
                 fontWeight: "bold",
               }}
             >
-              Select a book from the sidebar to view notes
+              {i18nConfig.translate("home.welcome")}
             </Text>
             <Text
               variant="bodyMedium"
               style={{ color: colors.text, textAlign: "center" }}
             >
-              Or create a new one by pressing the + symbol
+              {i18nConfig.translate("home.subWelcome")}
             </Text>
           </View>
           <DeleteDialog

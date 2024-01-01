@@ -3,13 +3,14 @@ import React from "react";
 import { IconButton, Text, useTheme } from "react-native-paper";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "../hooks/useNavigation";
+import i18nConfig from "../locales/i18n-config";
 
 const LockedView: React.FC = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
   const { checkAuth } = useAuth({
-    authMessage: "Re-authentificate",
+    authMessage: i18nConfig.translate("auth.reauth"),
     navigation: navigation,
   });
 
@@ -25,10 +26,10 @@ const LockedView: React.FC = () => {
         onPress={checkAuth}
       />
       <Text variant="titleLarge" style={[defaultTextStyle, styles.text]}>
-        Screen Locked
+        {i18nConfig.translate("auth.screenLocked")}
       </Text>
       <Text variant="bodyLarge" style={[defaultTextStyle, styles.text]}>
-        Press lock icon to re-authentificate
+        {i18nConfig.translate("auth.reauth")}
       </Text>
     </View>
   );
@@ -45,5 +46,6 @@ const styles = StyleSheet.create({
   },
   text: {
     marginHorizontal: 20,
+    textAlign: "center",
   },
 });

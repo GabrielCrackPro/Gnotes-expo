@@ -1,0 +1,46 @@
+{
+  "drawer": {
+    "home": "Home",
+    "settings": "Settings",
+    "createBook": "Create Book",
+    "noBooks": "No books"
+  },
+  "home": {
+    "welcome": "Select a book from the sidebar to view notes",
+    "subWelcome": "Or create a new one by pressing the + symbol"
+  },
+  "sheet": {
+    "addBook": "Add book",
+    "addNote": "Add note",
+    "cancel": "Cancel",
+    "name": "Name",
+    "body": "Body",
+    "preview": "Preview"
+  },
+  "emptyList": {
+    "noNotes": "No notes",
+    "subNoNotes": "Create a new one by pressing the + symbol"
+  },
+  "deleteDialog": {
+    "title": "Delete ",
+    "book": "The book and all its notes will be permanently lost",
+    "note": "This can't be undone",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "settings": {
+    "deleteAll": "Delete notes and books",
+    "lockApp": "Lock app",
+    "unlockApp": "Unlock app"
+  },
+  "auth": {
+    "verify": "Verify your identity to continue",
+    "bookLocked": "is locked",
+    "screenLocked": "Screen locked",
+    "appLocked": "App is locked",
+    "reauth": "Press lock icon to re-authenticate"
+  },
+  "share": {
+    "note": "Hey, here's my note created using Gnotes"
+  }
+}

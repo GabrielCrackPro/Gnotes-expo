@@ -6,11 +6,13 @@ import AppContext from "./AppContext";
 import { useDarkMode } from "./hooks/useDarkMode";
 import { PaperProvider } from "react-native-paper";
 import * as StatusBar from "expo-status-bar";
+import * as NavigationBar from "expo-navigation-bar";
+import * as Localization from "expo-localization";
 import { useAppLocked } from "./hooks/useAppLocked";
 import { darkThemeColors, lightThemeColors } from "./constants/colors";
-import * as NavigationBar from "expo-navigation-bar";
 import { useEffect } from "react";
 import { Platform } from "react-native";
+import i18nConfig from "./locales/i18n-config";
 
 export default function App() {
   const { isDark, toggleDark } = useDarkMode();
@@ -35,6 +37,11 @@ export default function App() {
       );
     }
   }, [isDark]);
+
+  useEffect(() => {
+    i18nConfig.locale = Localization.locale;
+    i18nConfig.enableFallback = true;
+  }, []);
 
   return (
     <AppContext.Provider value={globals}>

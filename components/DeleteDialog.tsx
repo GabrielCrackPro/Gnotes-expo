@@ -4,6 +4,7 @@ import { Book, Note } from "../models/Note";
 import { deleteNote } from "../utils/notes";
 import { deleteBook } from "../utils/books";
 import * as Haptics from "expo-haptics";
+import i18nConfig from "../locales/i18n-config";
 
 interface DeleteDialogProps {
   item?: Note | Book;
@@ -40,7 +41,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
       <Dialog.Icon icon="alert" size={30} color={colors.error} />
       <Dialog.Title>
         <Text style={{ color: colors.error, textAlign: "center" }}>
-          Delete {type === "book" ? "book" : "note"} {item?.title}
+          {i18nConfig.translate("deleteDialog.title") + item?.title + "?"}
         </Text>
       </Dialog.Title>
       <Dialog.Content>
@@ -49,20 +50,20 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
           style={{ color: colors.text, textAlign: "center" }}
         >
           {type === "book"
-            ? "The book and all its notes will be permanently lost"
-            : "This action can't be undone"}
+            ? i18nConfig.translate("deleteDialog.book")
+            : i18nConfig.translate("deleteDialog.note")}
         </Text>
       </Dialog.Content>
       <Dialog.Actions>
         <Button textColor={colors.text} onPress={onDismiss}>
-          Cancel
+          {i18nConfig.translate("deleteDialog.cancel")}
         </Button>
         <Button
           theme={{ colors: { primary: colors.error } }}
           mode="contained"
           onPress={handleDelete}
         >
-          Delete
+          {i18nConfig.translate("deleteDialog.delete")}
         </Button>
       </Dialog.Actions>
     </Dialog>

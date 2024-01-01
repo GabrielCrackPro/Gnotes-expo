@@ -8,6 +8,7 @@ import AuthView from "../components/AuthView";
 import NotesList from "../components/NotesList";
 import BottomSheetComponent from "../components/BottomSheet";
 import * as WebBrowser from "expo-web-browser";
+import i18nConfig from "../locales/i18n-config";
 
 interface RouteParams {
   bookId: string;
@@ -40,7 +41,9 @@ const Notes: React.FC = () => {
     <View style={styles.notes}>
       <AuthView
         authEnabled={(book?.locked as boolean) || false}
-        authMessage={`${book?.title} is locked`}
+        authMessage={`${book?.title} ${i18nConfig.translate(
+          "auth.bookLocked",
+        )}`}
       >
         {!add && <NotesList notes={notes} onLinkPress={handleLink} />}
       </AuthView>
