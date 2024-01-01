@@ -13,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ParamListBase, RouteProp } from "@react-navigation/native";
 import { getBookFromId } from "../utils/books";
 import { useNavigation } from "../hooks/useNavigation";
+import i18nConfig from "../locales/i18n-config";
 
 interface NavigationHeaderProps {
   route: RouteProp<ParamListBase, string>;
@@ -66,7 +67,9 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({ route }) => {
         onPress={toggleDrawer}
       />
       <Text variant="titleMedium" style={[headerTitleDefaultStyles]}>
-        {route.name === "Notes" ? bookName : route.name}
+        {route.name === "Notes"
+          ? bookName
+          : i18nConfig.translate(`header[${route.name}]`)}
       </Text>
       {route.name === "Notes" && (
         <View style={styles.row}>

@@ -42,5 +42,9 @@
   },
   "share": {
     "note": "Hey, here's my note created using Gnotes"
+  },
+  "header": {
+    "Home": "Home",
+    "Settings": "Settings"
   }
 }
