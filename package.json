@@ -37,8 +37,7 @@
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-select-dropdown": "^3.4.0",
-    "react-native-webview": "13.2.2",
-    "uuid": "^9.0.1"
+    "react-native-webview": "13.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
