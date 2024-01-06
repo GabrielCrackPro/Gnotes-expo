@@ -81,6 +81,14 @@ export const useNavigation = () => {
     });
   };
 
+  const goToNotifications = () => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: "Notifications",
+      }),
+    );
+  };
+
   const toggleDrawer = () => navigation.dispatch(DrawerActions.toggleDrawer());
   const openDrawer = () => navigation.dispatch(DrawerActions.openDrawer());
   const closeDrawer = () => navigation.dispatch(DrawerActions.closeDrawer());
@@ -93,6 +101,7 @@ export const useNavigation = () => {
     goToAddScreen,
     goToNotesDetails,
     goToNotesDetailsEdit,
+    goToNotifications,
     goBack,
     dissmissBottomSheet,
     openDrawer,

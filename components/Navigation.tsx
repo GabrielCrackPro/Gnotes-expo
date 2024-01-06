@@ -6,6 +6,7 @@ import NoteDetails from "../screens/NoteDetails";
 import { IconButton, useTheme } from "react-native-paper";
 import { View } from "react-native";
 import NoteDetailsHeader from "./NoteDetailsHeader";
+import Notifications from "../screens/Notifications";
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -31,6 +32,15 @@ const Navigation: React.FC = () => {
           headerLeft: () => <NoteDetailsHeader route={route} side="left" />,
           headerRight: () => <NoteDetailsHeader route={route} side="right" />,
           title: `${route.params?.note.title} details`,
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+        })}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
+        options={() => ({
           headerStyle: {
             backgroundColor: colors.background,
           },

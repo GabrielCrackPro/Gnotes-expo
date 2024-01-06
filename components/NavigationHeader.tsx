@@ -82,7 +82,17 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({ route }) => {
           <ThemeSwitcher />
         </View>
       )}
-      {route.name !== "Notes" && <ThemeSwitcher />}
+      {route.name !== "Notes" && (
+        <View style={styles.row}>
+          <IconButton
+            icon="bell"
+            size={18}
+            iconColor={colors.primary}
+            onPress={() => navigation.goToNotifications()}
+          />
+          <ThemeSwitcher />
+        </View>
+      )}
     </SafeAreaView>
   );
 };
