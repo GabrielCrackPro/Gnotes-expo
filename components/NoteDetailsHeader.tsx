@@ -1,8 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import { Icon, IconButton, useTheme } from "react-native-paper";
+import { IconButton, useTheme } from "react-native-paper";
 import { useNavigation } from "../hooks/useNavigation";
 import { containsMarkdown } from "../utils/common";
+import { ParamListBase, RouteProp } from "@react-navigation/native";
+import { shareNote } from "../utils/notes";
+import { Note } from "../models/Note";
 
 interface NoteDetailsHeaderProps {
   route: RouteProp<ParamListBase, string>;
@@ -16,27 +19,17 @@ const NoteDetailsHeader: React.FC<NoteDetailsHeaderProps> = ({
   const { colors } = useTheme();
   const navigation = useNavigation();
 
-  const handleNoteEdit = () => {
-    navigation.goToNotesDetailsEdit(route.params.note);
-  };
-
-  const toggleMarkdown = () => {
-    navigation.goToNotesDetailsEdit(
-      route.params.note,
-      !containsMarkdown(route.params.note.body),
-    );
-    console.log(route.params);
-  };
-
   const handleNoteDelete = () => {
     navigation.navigate("HomeNavigator", {
       screen: "Home",
       params: {
         openDialog: true,
-        noteToDelete: route.params.note,
+        noteToDelete: route.params?.note,
       },
     });
   };
+
+  const handleNoteShare = (note: Note) => shareNote(note);
 
   return (
     <View style={styles.noteDetailsHeader}>
@@ -48,7 +41,7 @@ const NoteDetailsHeader: React.FC<NoteDetailsHeaderProps> = ({
             size={22}
             onPress={() => navigation.goBack()}
           />
-          {route.params.edit && (
+          {route.params?.edit && (
             <IconButton
               iconColor={colors.primary}
               icon={
@@ -57,13 +50,19 @@ const NoteDetailsHeader: React.FC<NoteDetailsHeaderProps> = ({
                   : "format-text"
               }
               size={18}
-              onPress={toggleMarkdown}
             />
           )}
         </>
       )}
       {side === "right" && (
         <>
+          <IconButton
+            icon="share-variant"
+            iconColor={colors.primary}
+            size={18}
+            onPress={handleNoteShare}
+          />
+
           <IconButton
             icon="delete"
             iconColor={colors.primary}

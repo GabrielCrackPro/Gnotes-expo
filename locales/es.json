@@ -31,7 +31,10 @@
   "settings": {
     "deleteAll": "Eliminar notas y libros",
     "lockApp": "Bloquear aplicación",
-    "unlockApp": "Desbloquear aplicación"
+    "unlockApp": "Desbloquear aplicación",
+    "deleteDescription": "Eliminar todas las notas y los libros de la aplicación",
+    "lockDescription": "Bloquear la aplicación usando datos biometricos o PIN",
+    "unlockDescription": "Desbloquear la aplicación"
   },
   "auth": {
     "verify": "Verifica tu identidad para continuar",

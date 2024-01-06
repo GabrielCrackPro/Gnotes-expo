@@ -14,7 +14,7 @@ import { useNavigation } from "../hooks/useNavigation";
 import { MarkdownView } from "react-native-markdown-view";
 import useMarkdownTheme from "../hooks/useMarkdownTheme";
 import { shareNote } from "../utils/notes";
-import { containsMarkdown } from "../utils/common";
+import { containsMarkdown, truncateText } from "../utils/common";
 
 interface NoteProps {
   note: Note;
@@ -34,6 +34,8 @@ const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
   };
   const defaultNoteBodyStyles: StyleProp<TextStyle> = {
     color: colors.text,
+    flexWrap: "wrap",
+    padding: 5,
   };
 
   const expandNote = () => {
@@ -41,6 +43,7 @@ const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
   };
 
   const handleEditNote = (note: Note) => navigation.goToNotesDetailsEdit(note);
+  const handleShareNote = (note: Note) => shareNote(note);
 
   return (
     <>
@@ -68,13 +71,12 @@ const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
               </ScrollView>
             </View>
           ) : (
-            <Text variant="bodyMedium" style={defaultNoteBodyStyles}>
-              {note.body}
+            <Text selectable variant="bodyMedium" style={defaultNoteBodyStyles}>
+              {truncateText(note.body)}
             </Text>
           )}
 
           <Text variant="bodySmall" style={defaultNoteBodyStyles}>
-            Created at:
             {note.createdAt}
           </Text>
         </View>
@@ -84,6 +86,12 @@ const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
             size={20}
             iconColor={colors.primary}
             onPress={() => handleEditNote(note)}
+          />
+          <IconButton
+            icon="share-variant"
+            size={20}
+            iconColor={colors.primary}
+            onPress={() => handleShareNote(note)}
           />
         </View>
       </Pressable>

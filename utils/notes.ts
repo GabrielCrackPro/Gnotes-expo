@@ -57,6 +57,7 @@ const editNote = async (updatedNote: Note): Promise<Note[]> => {
           ...note,
           title: updatedNote.title,
           body: updatedNote.body,
+          createdAt: new Date().toLocaleDateString(),
         };
       }
       return note;

@@ -31,7 +31,10 @@
   "settings": {
     "deleteAll": "Delete notes and books",
     "lockApp": "Lock app",
-    "unlockApp": "Unlock app"
+    "unlockApp": "Unlock app",
+    "deleteDescription": "Delete all notes and books in the app",
+    "lockDescription": "Lock app using biometrics or PIN",
+    "unlockDescription": "Unlock app"
   },
   "auth": {
     "verify": "Verify your identity to continue",

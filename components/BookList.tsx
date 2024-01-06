@@ -48,52 +48,50 @@ const BookList: React.FC = () => {
             onPress={() => goToSettings()}
           />
         </Drawer.Section>
-        <Drawer.Section>
-          {books.length ? (
-            books.map((book, index) => (
-              <Drawer.Item
-                key={index}
-                label={book.title}
-                icon="book"
-                theme={{ colors: { onSurfaceVariant: colors.primary } }}
-                style={{
-                  borderRadius: 12,
-                  borderWidth: 1,
-                  borderColor: book.color,
-                  marginVertical: 10,
-                }}
-                onPress={() => goToNotes(book.id)}
-                right={() => (
-                  <>
-                    {book.locked && (
-                      <Icon source="lock" size={18} color={colors.primary} />
-                    )}
-                    <IconButton
-                      icon="delete"
-                      iconColor={colors.primary}
-                      size={18}
-                      onPress={() => {
-                        navigation.navigate("HomeNavigator", {
-                          screen: "Home",
-                          params: {
-                            bookToDelete: book,
-                            openDialog: true,
-                          },
-                        });
-                      }}
-                    />
-                  </>
-                )}
-              />
-            ))
-          ) : (
+        {books.length ? (
+          books.map((book, index) => (
             <Drawer.Item
-              icon="bookshelf"
+              key={index}
+              label={book.title}
+              icon="book"
               theme={{ colors: { onSurfaceVariant: colors.primary } }}
-              label={i18nConfig.translate("drawer.noBooks")}
+              style={{
+                borderRadius: 12,
+                borderWidth: 1,
+                borderColor: book.color,
+                marginVertical: 10,
+              }}
+              onPress={() => goToNotes(book.id)}
+              right={() => (
+                <>
+                  {book.locked && (
+                    <Icon source="lock" size={18} color={colors.primary} />
+                  )}
+                  <IconButton
+                    icon="delete"
+                    iconColor={colors.primary}
+                    size={18}
+                    onPress={() => {
+                      navigation.navigate("HomeNavigator", {
+                        screen: "Home",
+                        params: {
+                          bookToDelete: book,
+                          openDialog: true,
+                        },
+                      });
+                    }}
+                  />
+                </>
+              )}
             />
-          )}
-        </Drawer.Section>
+          ))
+        ) : (
+          <Drawer.Item
+            icon="bookshelf"
+            theme={{ colors: { onSurfaceVariant: colors.primary } }}
+            label={i18nConfig.translate("drawer.noBooks")}
+          />
+        )}
         <Drawer.Item
           icon="plus"
           theme={{ colors: { onSurfaceVariant: colors.primary } }}

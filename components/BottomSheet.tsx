@@ -287,6 +287,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                     placeholder={i18nConfig.translate("sheet.body")}
                     placeholderTextColor={colors.placeholder}
                     onChangeText={(text: string) => setNoteBody(text)}
+                    multiline
                   />
                 )}
               </>
@@ -330,6 +331,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 16,
     padding: 8,
+    flexWrap: "wrap",
   },
   textArea: {
     width: 330,

@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 1,
-    elevation: 15,
+    elevation: 3,
     justifyContent: "space-between",
   },
   title: {

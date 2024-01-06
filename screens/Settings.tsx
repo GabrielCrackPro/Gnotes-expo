@@ -24,7 +24,7 @@ const Settings: React.FC = () => {
   });
 
   const defaultSettingsItemStyle: StyleProp<ViewStyle> = {
-    backgroundColor: colors.surface,
+    backgroundColor: colors.surfaceVariant,
   };
   const defaultSettingsTextStyle: StyleProp<TextStyle> = {
     color: colors.text,
@@ -44,18 +44,15 @@ const Settings: React.FC = () => {
   return (
     <View>
       <List.Item
-        title={i18nConfig.translate("settings.deleteAll")}
-        style={[defaultSettingsItemStyle, styles.row]}
-        titleStyle={[defaultSettingsTextStyle, styles.text]}
-        centered
-        left={() => <List.Icon icon="delete" color={colors.primary} />}
-        onPress={handleClear}
-      />
-      <List.Item
         title={
           isAppLocked
             ? i18nConfig.translate("settings.unlockApp")
             : i18nConfig.translate("settings.lockApp")
+        }
+        description={
+          isAppLocked
+            ? i18nConfig.translate("settings.unlockDescription")
+            : i18nConfig.translate("settings.lockDescription")
         }
         style={[defaultSettingsItemStyle, styles.row]}
         titleStyle={[defaultSettingsTextStyle, styles.text]}
@@ -67,6 +64,15 @@ const Settings: React.FC = () => {
             color={colors.primary}
           />
         )}
+      />
+      <List.Item
+        title={i18nConfig.translate("settings.deleteAll")}
+        description={i18nConfig.translate("settings.deleteDescription")}
+        style={[defaultSettingsItemStyle, styles.row]}
+        titleStyle={[defaultSettingsTextStyle, styles.text]}
+        centered
+        left={() => <List.Icon icon="delete" color={colors.primary} />}
+        onPress={handleClear}
       />
     </View>
   );

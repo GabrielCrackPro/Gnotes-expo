@@ -26,7 +26,7 @@ interface RouteParams {
 
 const NoteDetails: React.FC = () => {
   const route = useRoute();
-  const { note, toggleMarkdown } = route.params as RouteParams;
+  const { note } = route.params as RouteParams;
   const { markdownStyles } = useMarkdownTheme();
   const { colors } = useTheme();
   const navigation = useNavigation();
@@ -56,18 +56,23 @@ const NoteDetails: React.FC = () => {
   };
 
   return (
-    <ScrollView style={styles.noteDetails}>
+    <View style={styles.noteDetails}>
       {!editMode && (
         <>
-          <Text>{note.title}</Text>
+          <Text variant="titleLarge" style={styles.noteTitle}>
+            {note.title}
+          </Text>
           {containsMarkdown(note.body) ? (
             <MarkdownView styles={markdownStyles} onLinkPress={openLink}>
               {note.body}
             </MarkdownView>
           ) : (
-            <Text>{note.body}</Text>
+            <Text selectable>{note.body}</Text>
           )}
-          <Text variant="bodySmall" style={{ color: colors.outlineVariant }}>
+          <Text
+            variant="bodySmall"
+            style={{ color: colors.outlineVariant, marginTop: 15 }}
+          >
             {note.createdAt}
           </Text>
         </>
@@ -79,7 +84,7 @@ const NoteDetails: React.FC = () => {
             onChangeText={(text: string) => setEditNoteTitle(text)}
             style={[defaultInputStyles, styles.textInput]}
           />
-          {containsMarkdown(note.body) || toggleMarkdown ? (
+          {containsMarkdown(note.body) ? (
             <MarkdownEditor
               defaultValue={editNoteBody}
               onMarkdownChange={(text: string) => setEditNoteBody(text)}
@@ -91,6 +96,7 @@ const NoteDetails: React.FC = () => {
               value={editNoteBody}
               onChangeText={(text: string) => setEditNoteBody(text)}
               style={[defaultInputStyles, styles.textArea]}
+              multiline
             />
           )}
           <View style={styles.row}>
@@ -103,7 +109,7 @@ const NoteDetails: React.FC = () => {
           </View>
         </>
       )}
-    </ScrollView>
+    </View>
   );
 };
 
@@ -127,6 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 16,
     padding: 8,
+    flexWrap: "wrap",
   },
   textInput: {
     width: 360,
@@ -134,5 +141,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 16,
     padding: 8,
+    flexWrap: "wrap",
+  },
+  noteTitle: {
+    marginBottom: 15,
   },
 });

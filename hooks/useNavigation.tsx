@@ -40,11 +40,11 @@ export const useNavigation = () => {
     );
   };
 
-  const goToNotesDetailsEdit = (note: Note, toggleMarkdown?: boolean) => {
+  const goToNotesDetailsEdit = (note: Note) => {
     navigation.dispatch(
       CommonActions.navigate({
         name: "NotesDetails",
-        params: { note, edit: true, markdown: toggleMarkdown },
+        params: { note, edit: true },
       }),
     );
   };

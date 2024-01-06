@@ -1,3 +1,4 @@
+import { TRUNCATE_MAX_LENGTH } from "../constants/text";
 import { Book, Note } from "../models/Note";
 
 const generateUuid = (): string => {
@@ -85,9 +86,21 @@ const containsMarkdown = (text: string) => {
   return markdownRegExp.test(text);
 };
 
+const truncateText = (text: string, maxLength?: number): string => {
+  if (!maxLength) {
+    maxLength = TRUNCATE_MAX_LENGTH;
+  }
+  if (text.length <= maxLength) {
+    return text;
+  } else {
+    return text.slice(0, maxLength) + "...";
+  }
+};
+
 export {
   generateUuid,
   validateFormFields,
   getMissingFieldsString,
   containsMarkdown,
+  truncateText,
 };
