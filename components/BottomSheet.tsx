@@ -30,6 +30,7 @@ import { useNavigation } from "../hooks/useNavigation";
 import * as Haptics from "expo-haptics";
 import MarkdownEditor from "./MarkdownEditor/MarkdownEditor";
 import i18nConfig from "../locales/i18n-config";
+import NotificationScheduler from "./NotificationScheduler";
 
 type BottomSheetStyle = StyleProp<
   Animated.AnimateStyle<
@@ -86,6 +87,8 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [errors, setErrors] = useState("");
 
+  const [schedulerVisible, setSchedulerVisible] = useState(false);
+
   const defaultInputStyles: StyleProp<TextStyle> = {
     backgroundColor: colors.surfaceVariant,
   };
@@ -103,6 +106,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
     setBookColor("");
     setBookLocked(false);
     setInsertMarkdown(false);
+    setSchedulerVisible(false);
   };
 
   const addBook = async () => {
@@ -122,7 +126,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
     } else {
       setSnackbarVisible(true);
       setErrors(getMissingFieldsString("book", book));
-      Haptics.placeholder(Haptics.NotificationFeedbackType.Error);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
   };
 
@@ -172,8 +176,7 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
           style={bottomSheetStyle.main}
           containerStyle={bottomSheetStyle.container}
           backgroundStyle={bottomSheetStyle.background}
-          handleIndicatorStyle={{ backgroundColor: colors.primary }}
-          keyboardBehavior="extend"
+          handleComponent={null}
         >
           <BottomSheetScrollView
             style={[styles.contentContainer, { backgroundColor: colors.card }]}
@@ -240,56 +243,80 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                     {i18nConfig.translate("sheet.addNote")}
                   </Button>
                 </View>
-
-                <BottomSheetTextInput
-                  style={[
-                    defaultInputStyles,
-                    styles.input,
-                    { color: colors.text },
-                  ]}
-                  placeholder={i18nConfig.translate("sheet.name")}
-                  placeholderTextColor={colors.placeholder}
-                  editable={false}
-                  value={book?.title}
-                />
                 <View style={styles.row}>
-                  <BottomSheetTextInput
-                    style={[
-                      defaultInputStyles,
-                      styles.input,
-                      {
-                        color: colors.text,
-                      },
-                    ]}
-                    placeholder={i18nConfig.translate("sheet.name")}
-                    placeholderTextColor={colors.placeholder}
-                    onChangeText={(text: string) => setNoteTitle(text)}
-                  />
                   <IconButton
                     icon={insertMarkdown ? "language-markdown" : "format-text"}
                     iconColor={colors.primary}
                     onPress={() => setInsertMarkdown((prev) => !prev)}
                     animated
                   />
+                  <Text style={{ color: colors.primary }}>
+                    {insertMarkdown
+                      ? i18nConfig.translate("sheet.markdown")
+                      : i18nConfig.translate("sheet.simpleText")}
+                  </Text>
                 </View>
-                {insertMarkdown ? (
-                  <MarkdownEditor
-                    onMarkdownChange={(text: string) => setNoteBody(text)}
-                    editorStyles={styles.textArea}
+                <View style={styles.row}>
+                  <IconButton
+                    icon={schedulerVisible ? "bell-off" : "bell"}
+                    iconColor={colors.primary}
+                    onPress={() => setSchedulerVisible((prev) => !prev)}
+                    animated
                   />
-                ) : (
-                  <BottomSheetTextInput
-                    style={[
-                      defaultInputStyles,
-                      styles.textArea,
-                      { color: colors.text },
-                    ]}
-                    placeholder={i18nConfig.translate("sheet.body")}
-                    placeholderTextColor={colors.placeholder}
-                    onChangeText={(text: string) => setNoteBody(text)}
-                    multiline
-                  />
+                  <Text style={{ color: colors.primary }}>
+                    {schedulerVisible
+                      ? i18nConfig.translate("sheet.hideScheduler")
+                      : i18nConfig.translate("sheet.scheduleNotification")}
+                  </Text>
+                </View>
+                {!schedulerVisible && (
+                  <View>
+                    <BottomSheetTextInput
+                      style={[
+                        defaultInputStyles,
+                        styles.input,
+                        { color: colors.text },
+                      ]}
+                      placeholder={i18nConfig.translate("sheet.name")}
+                      placeholderTextColor={colors.placeholder}
+                      editable={false}
+                      value={book?.title}
+                    />
+                    <View style={styles.row}>
+                      <BottomSheetTextInput
+                        style={[
+                          defaultInputStyles,
+                          styles.input,
+                          {
+                            color: colors.text,
+                          },
+                        ]}
+                        placeholder={i18nConfig.translate("sheet.name")}
+                        placeholderTextColor={colors.placeholder}
+                        onChangeText={(text: string) => setNoteTitle(text)}
+                      />
+                    </View>
+                    {insertMarkdown ? (
+                      <MarkdownEditor
+                        onMarkdownChange={(text: string) => setNoteBody(text)}
+                        editorStyles={styles.textArea}
+                      />
+                    ) : (
+                      <BottomSheetTextInput
+                        style={[
+                          defaultInputStyles,
+                          styles.textArea,
+                          { color: colors.text },
+                        ]}
+                        placeholder={i18nConfig.translate("sheet.body")}
+                        placeholderTextColor={colors.placeholder}
+                        onChangeText={(text: string) => setNoteBody(text)}
+                        multiline
+                      />
+                    )}
+                  </View>
                 )}
+                <NotificationScheduler visible={schedulerVisible} />
               </>
             )}
           </BottomSheetScrollView>

@@ -15,7 +15,11 @@
     "cancel": "Cancel",
     "name": "Name",
     "body": "Body",
-    "preview": "Preview"
+    "preview": "Preview",
+    "markdown": "Markdown",
+    "simpleText": "Simple Text",
+    "scheduleNotification": "Schedule notification",
+    "hideScheduler": "Close"
   },
   "emptyList": {
     "noNotes": "No notes",

@@ -8,15 +8,20 @@ import { PaperProvider } from "react-native-paper";
 import * as StatusBar from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
 import * as Localization from "expo-localization";
+import * as Notifications from "expo-notifications";
 import { useAppLocked } from "./hooks/useAppLocked";
 import { darkThemeColors, lightThemeColors } from "./constants/colors";
 import { useEffect } from "react";
 import { Platform } from "react-native";
 import i18nConfig from "./locales/i18n-config";
+import { useNotifications } from "./hooks/useNotifications";
 
 export default function App() {
   const { isDark, toggleDark } = useDarkMode();
   const { isAppLocked, toggleAppLocked } = useAppLocked();
+  const notifications = useNotifications();
+
+  useNotifications();
 
   const globals = {
     isDark,
@@ -24,6 +29,14 @@ export default function App() {
     toggleAppLocked,
     toggleDark,
   };
+
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
 
   useEffect(() => {
     if (Platform.OS === "android") {
