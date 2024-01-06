@@ -1,11 +1,19 @@
 import {
+  CommonActions,
   DrawerActions,
   useNavigation as useRNNavigation,
 } from "@react-navigation/native";
 import { DrawerNavigation } from "../models/navigation";
+import { Note } from "../models/Note";
 
 export const useNavigation = () => {
   const navigation = useRNNavigation<DrawerNavigation>();
+
+  const goBack = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
+  };
 
   const goHome = () => {
     navigation.navigate("HomeNavigator", {
@@ -21,6 +29,24 @@ export const useNavigation = () => {
         bookId,
       },
     });
+  };
+
+  const goToNotesDetails = (note: Note) => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: "NotesDetails",
+        params: { note },
+      }),
+    );
+  };
+
+  const goToNotesDetailsEdit = (note: Note, toggleMarkdown?: boolean) => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: "NotesDetails",
+        params: { note, edit: true, markdown: toggleMarkdown },
+      }),
+    );
   };
 
   const goToAddScreen = (screen: "Home" | "Notes", bookId?: string) => {
@@ -65,6 +91,9 @@ export const useNavigation = () => {
     goToNotes,
     goToSettings,
     goToAddScreen,
+    goToNotesDetails,
+    goToNotesDetailsEdit,
+    goBack,
     dissmissBottomSheet,
     openDrawer,
     closeDrawer,

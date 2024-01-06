@@ -39,6 +39,7 @@ const lightThemeColors = {
   scrim: "#D8BFD8",
   backdrop: "#808080",
   placeholder: "#CCCCCC",
+  border: "#DDDDDD",
 };
 
 const darkThemeColors = {
@@ -77,6 +78,7 @@ const darkThemeColors = {
   scrim: "#D8BFD8",
   backdrop: "#090909",
   placeholder: "#CCCCCC",
+  border: "#262727",
 };
 
 export { lightThemeColors, darkThemeColors };

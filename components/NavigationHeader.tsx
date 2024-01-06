@@ -42,7 +42,7 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({ route }) => {
 
   const headerDefaultStyles: StyleProp<ViewStyle> = {
     backgroundColor: colors.background,
-    borderBottomColor: colors.primary,
+    borderBottomColor: colors.border,
   };
 
   const headerTitleDefaultStyles: StyleProp<TextStyle> = {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 1,
-    elevation: 8,
+    elevation: 15,
     justifyContent: "space-between",
   },
   title: {

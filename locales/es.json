@@ -46,5 +46,9 @@
   "header": {
     "Home": "Inicio",
     "Settings": "Configuración"
+  },
+  "buttons": {
+    "accept": "Aceptar",
+    "cancel": "Cancelar"
   }
 }

@@ -1,4 +1,5 @@
 import {
+  Pressable,
   ScrollView,
   StyleProp,
   StyleSheet,
@@ -35,9 +36,18 @@ const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
     color: colors.text,
   };
 
+  const expandNote = () => {
+    navigation.goToNotesDetails(note);
+  };
+
+  const handleEditNote = (note: Note) => navigation.goToNotesDetailsEdit(note);
+
   return (
     <>
-      <View style={[defaultNoteItemStyles, styles.noteItem]}>
+      <Pressable
+        onPress={expandNote}
+        style={[defaultNoteItemStyles, styles.noteItem]}
+      >
         <View>
           <View style={[styles.row, { justifyContent: "space-between" }]}>
             <Text variant="headlineSmall" style={{ color: colors.text }}>
@@ -70,33 +80,13 @@ const NoteItem: React.FC<NoteProps> = ({ note, onLinkPress }) => {
         </View>
         <View style={styles.row}>
           <IconButton
-            icon="share-variant"
-            size={20}
-            iconColor={colors.primary}
-            onPress={() => shareNote(note)}
-          />
-          <IconButton
             icon="pencil"
             size={20}
             iconColor={colors.primary}
-            onPress={() => {}}
-          />
-          <IconButton
-            icon="delete"
-            size={20}
-            iconColor={colors.primary}
-            onPress={() => {
-              navigation.navigate("HomeNavigator", {
-                screen: "Home",
-                params: {
-                  openDialog: true,
-                  noteToDelete: note,
-                },
-              });
-            }}
+            onPress={() => handleEditNote(note)}
           />
         </View>
-      </View>
+      </Pressable>
     </>
   );
 };

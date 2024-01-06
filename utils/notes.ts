@@ -2,6 +2,7 @@ import { Share } from "react-native";
 import { Note } from "../models/Note";
 import { checkExists, getValue, setValue } from "./storage";
 import i18nConfig from "../locales/i18n-config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const getNotes = async (): Promise<Note[]> => {
   try {
@@ -37,6 +38,38 @@ const createNote = async (note: Note): Promise<void> => {
   }
 };
 
+const updateNotes = async (updatedNotes: Note[]): Promise<void> => {
+  try {
+    const serializedNotes = JSON.stringify(updatedNotes);
+    await AsyncStorage.setItem("notes", serializedNotes);
+  } catch (error) {
+    console.error("Error updating notes:", error);
+    throw error;
+  }
+};
+
+const editNote = async (updatedNote: Note): Promise<Note[]> => {
+  try {
+    const notes = await getNotes();
+    const notesUpdated = notes.map((note: Note) => {
+      if (note.id === updatedNote.id) {
+        return {
+          ...note,
+          title: updatedNote.title,
+          body: updatedNote.body,
+        };
+      }
+      return note;
+    });
+
+    await updateNotes(notesUpdated);
+    return notesUpdated;
+  } catch (error) {
+    console.error("Error editing note:", error);
+    throw error;
+  }
+};
+
 const deleteNote = async (note: Note): Promise<void> => {
   try {
     const notes = await getNotes();
@@ -61,4 +94,11 @@ const shareNote = async (note: Note) => {
   });
 };
 
-export { getNotes, getNotesByBook, createNote, deleteNote, shareNote };
+export {
+  getNotes,
+  getNotesByBook,
+  createNote,
+  deleteNote,
+  shareNote,
+  editNote,
+};

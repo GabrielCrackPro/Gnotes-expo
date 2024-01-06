@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { MarkdownView } from "react-native-markdown-view";
 import renderFormatButtons from "./utils/renderFormatButtons";
-import { IconButton, useTheme } from "react-native-paper";
+import { IconButton, TextInput, useTheme } from "react-native-paper";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { MarkdownFormat } from "./utils/Formats";
 import useMarkdownTheme from "../../hooks/useMarkdownTheme";
@@ -67,11 +67,9 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
 
   const renderPreview = () => {
     return (
-      <View style={defaultInputStyles}>
+      <View style={[defaultInputStyles, styles.preview]}>
         <ScrollView removeClippedSubviews>
-          <MarkdownView
-            styles={{ ...markdownStyles, text: { color: colors.placeholder } }}
-          >
+          <MarkdownView styles={markdownStyles}>
             {text === "" ? i18nConfig.translate("sheet.preview") : text}
           </MarkdownView>
         </ScrollView>
@@ -82,7 +80,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
   const WrapperView = Platform.OS === "ios" ? KeyboardAvoidingView : View;
   return (
     <WrapperView behavior="padding" style={editorStyles}>
-      <BottomSheetTextInput
+      <TextInput
         style={[defaultInputStyles, styles.composeText, { color: colors.text }]}
         multiline
         underlineColorAndroid="transparent"
@@ -114,7 +112,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
             },
           },
           Formats,
-          markdownButton
+          markdownButton,
         )}
       </View>
 
@@ -131,6 +129,14 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  preview: {
+    borderBottomWidth: 1,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    padding: 8,
   },
 });
 

@@ -57,7 +57,9 @@ const BookList: React.FC = () => {
                 icon="book"
                 theme={{ colors: { onSurfaceVariant: colors.primary } }}
                 style={{
-                  backgroundColor: book.color,
+                  borderRadius: 12,
+                  borderWidth: 1,
+                  borderColor: book.color,
                   marginVertical: 10,
                 }}
                 onPress={() => goToNotes(book.id)}
