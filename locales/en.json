@@ -19,7 +19,8 @@
     "markdown": "Markdown",
     "simpleText": "Simple Text",
     "scheduleNotification": "Schedule notification",
-    "hideScheduler": "Close"
+    "hideScheduler": "Close",
+    "rescheduleNotification": "Reschedule notification"
   },
   "emptyList": {
     "noNotes": "No notes",
@@ -53,7 +54,8 @@
   "header": {
     "Home": "Home",
     "Settings": "Settings",
-    "NotesDetails": "Details"
+    "NotesDetails": "Details",
+    "Notifications": "Notifications"
   },
   "buttons": {
     "accept": "Ok",
@@ -67,5 +69,10 @@
     "title": "Notification title",
     "body": "Notification body",
     "select": "Select"
+  },
+  "notifications": {
+    "emptyTitle": "There are no notifications to show",
+    "emptyDescription": "When you recieve a notification you will see it here",
+    "delete": "Delete"
   }
 }

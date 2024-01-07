@@ -1,4 +1,5 @@
 import { TRUNCATE_MAX_LENGTH } from "../constants/text";
+import i18nConfig from "../locales/i18n-config";
 import { Book, Note } from "../models/Note";
 
 const generateUuid = (): string => {
@@ -97,10 +98,15 @@ const truncateText = (text: string, maxLength?: number): string => {
   }
 };
 
+const getHeaderTitle = (routeName: string): string => {
+  return i18nConfig.translate(`header[${routeName}]`);
+};
+
 export {
   generateUuid,
   validateFormFields,
   getMissingFieldsString,
   containsMarkdown,
   truncateText,
+  getHeaderTitle,
 };

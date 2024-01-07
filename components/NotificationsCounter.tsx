@@ -10,16 +10,15 @@ const NotificationsCounter: React.FC = () => {
   const navigation = useNavigation();
 
   const [count, setCount] = useState(0);
-  let notificationsCount;
 
   useEffect(() => {
     const isAnyNotification = async () => {
-      notificationsCount = await getNotificationsCount();
+      const notificationsCount = await getNotificationsCount();
       setCount(notificationsCount);
     };
 
     isAnyNotification();
-  }, [notificationsCount]);
+  }, []);
 
   return (
     <View style={styles.notificationsCounter}>

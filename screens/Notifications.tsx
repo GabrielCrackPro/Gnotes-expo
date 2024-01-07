@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import * as LocalNotifications from "expo-notifications";
 import NotificationCard from "../components/NotificationCard";
 import { useNotifications } from "../hooks/useNotifications";
+import EmptyList from "../components/EmptyList";
+import i18nConfig from "../locales/i18n-config";
 
 const Notifications: React.FC = () => {
   const [notifications, setNotifications] = useState<
@@ -24,6 +26,13 @@ const Notifications: React.FC = () => {
         data={notifications}
         renderItem={({ item }) => <NotificationCard notification={item} />}
         keyExtractor={(item) => item.request.identifier}
+        ListEmptyComponent={() => (
+          <EmptyList
+            icon="bell-off"
+            title={i18nConfig.translate("notifications.emptyTitle")}
+            description={i18nConfig.translate("notifications.emptyDescription")}
+          />
+        )}
       />
     </View>
   );

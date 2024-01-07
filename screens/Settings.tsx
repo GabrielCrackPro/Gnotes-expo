@@ -62,6 +62,7 @@ const Settings: React.FC = () => {
           <List.Icon
             icon={isAppLocked ? "lock" : "lock-open-variant"}
             color={colors.primary}
+            style={{ padding: 8 }}
           />
         )}
       />
@@ -71,7 +72,13 @@ const Settings: React.FC = () => {
         style={[defaultSettingsItemStyle, styles.row]}
         titleStyle={[defaultSettingsTextStyle, styles.text]}
         centered
-        left={() => <List.Icon icon="delete" color={colors.primary} />}
+        left={() => (
+          <List.Icon
+            icon="delete"
+            color={colors.primary}
+            style={{ padding: 8 }}
+          />
+        )}
         onPress={handleClear}
       />
     </View>

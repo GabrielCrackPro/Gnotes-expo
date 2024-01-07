@@ -3,6 +3,7 @@ import React from "react";
 import { Note as INote } from "../models/Note";
 import NoteItem from "./Note";
 import EmptyList from "./EmptyList";
+import i18nConfig from "../locales/i18n-config";
 
 interface NotesListProps {
   notes: INote[];
@@ -19,7 +20,13 @@ const NotesList: React.FC<NotesListProps> = ({ notes, onLinkPress }) => {
         renderItem={({ item }) => (
           <NoteItem note={item} onLinkPress={onLinkPress} />
         )}
-        ListEmptyComponent={() => <EmptyList />}
+        ListEmptyComponent={() => (
+          <EmptyList
+            icon="note-multiple"
+            title={i18nConfig.translate("emptyList.noNotes")}
+            description={i18nConfig.translate("emptyList.subNoNotes")}
+          />
+        )}
       />
     </View>
   );

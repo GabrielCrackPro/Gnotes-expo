@@ -62,11 +62,7 @@ const NotificationScheduler: React.FC<NotificationSchedulerProps> = ({
         />
         <Dropdown
           placeholder={i18nConfig.translate("notificationScheduler.select")}
-          data={[
-            i18nConfig.translate("notificationScheduler.seconds"),
-            i18nConfig.translate("notificationScheduler.minutes"),
-            i18nConfig.translate("notificationScheduler.hours"),
-          ]}
+          data={["seconds", "minutes", "hours"]}
           onSelect={(select: string) => {
             const trigger: NotificationTrigger = {
               channelId: "default",

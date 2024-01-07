@@ -8,10 +8,16 @@ interface DropdownProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any[];
   placeholder: string;
+  selectedDefault?: string;
   onSelect: (entry: any) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ data, placeholder, onSelect }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  data,
+  placeholder,
+  selectedDefault,
+  onSelect,
+}) => {
   const { colors } = useTheme();
 
   const defaultDropdownStyles: StyleProp<ViewStyle> = {
@@ -20,6 +26,7 @@ const Dropdown: React.FC<DropdownProps> = ({ data, placeholder, onSelect }) => {
     borderWidth: 1,
     borderRadius: 10,
     marginTop: 8,
+    borderColor: colors.border,
   };
 
   const defaultDropdownRowStyles: StyleProp<ViewStyle> = {
@@ -45,6 +52,7 @@ const Dropdown: React.FC<DropdownProps> = ({ data, placeholder, onSelect }) => {
       rowTextStyle={defaultDropdownTextStyles}
       selectedRowTextStyle={selectedRowTextStyles}
       defaultButtonText={placeholder}
+      defaultValue={selectedDefault}
     />
   );
 };

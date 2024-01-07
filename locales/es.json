@@ -19,7 +19,8 @@
     "markdown": "Markdown",
     "simpleText": "Texto plano",
     "scheduleNotification": "Programar notificación",
-    "hideScheduler": "Cerrar"
+    "hideScheduler": "Cerrar",
+    "rescheduleNotification": "Reprogramar notification"
   },
   "emptyList": {
     "noNotes": "No hay notas",
@@ -53,7 +54,8 @@
   "header": {
     "Home": "Inicio",
     "Settings": "Configuración",
-    "NotesDetails": "Detalles"
+    "NotesDetails": "Detalles",
+    "Notifications": "Notificaciones"
   },
   "buttons": {
     "accept": "Aceptar",
@@ -67,5 +69,10 @@
     "title": "Titulo de notificación",
     "body": "Cuerpo de notificación",
     "select": "Selecciona"
+  },
+  "notifications": {
+    "emptyTitle": "No hay notificaciones",
+    "emptyDescription": "Cuando recibas notificaciones aparecerán aquí",
+    "delete": "Eliminar"
   }
 }
