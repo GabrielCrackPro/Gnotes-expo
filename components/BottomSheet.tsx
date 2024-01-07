@@ -1,15 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  TextStyle,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
-import BottomSheet, {
-  BottomSheetScrollView,
-  BottomSheetTextInput,
-} from "@gorhom/bottom-sheet";
+import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { Book, Note } from "../models/Note";
 import { createBook, getBookFromId } from "../utils/books";
 import { createNote } from "../utils/notes";
@@ -31,6 +22,7 @@ import * as Haptics from "expo-haptics";
 import MarkdownEditor from "./MarkdownEditor/MarkdownEditor";
 import i18nConfig from "../locales/i18n-config";
 import NotificationScheduler from "./NotificationScheduler";
+import TextInput from "../atoms/TextInput";
 
 type BottomSheetStyle = StyleProp<
   Animated.AnimateStyle<
@@ -88,10 +80,6 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
   const [errors, setErrors] = useState("");
 
   const [schedulerVisible, setSchedulerVisible] = useState(false);
-
-  const defaultInputStyles: StyleProp<TextStyle> = {
-    backgroundColor: colors.surfaceVariant,
-  };
 
   useEffect(() => {
     const getBook = async () => {
@@ -196,14 +184,9 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                   </Button>
                 </View>
                 <View style={styles.row}>
-                  <BottomSheetTextInput
-                    style={[
-                      defaultInputStyles,
-                      styles.input,
-                      { color: colors.text },
-                    ]}
+                  <TextInput
+                    type="input"
                     placeholder={i18nConfig.translate("sheet.name")}
-                    placeholderTextColor={colors.placeholder}
                     onChangeText={(text: string) => setBookTitle(text)}
                   />
                   <IconButton
@@ -271,28 +254,16 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                 </View>
                 {!schedulerVisible && (
                   <View>
-                    <BottomSheetTextInput
-                      style={[
-                        defaultInputStyles,
-                        styles.input,
-                        { color: colors.text },
-                      ]}
+                    <TextInput
+                      type="input"
                       placeholder={i18nConfig.translate("sheet.name")}
-                      placeholderTextColor={colors.placeholder}
                       editable={false}
                       value={book?.title}
                     />
                     <View style={styles.row}>
-                      <BottomSheetTextInput
-                        style={[
-                          defaultInputStyles,
-                          styles.input,
-                          {
-                            color: colors.text,
-                          },
-                        ]}
+                      <TextInput
+                        type="input"
                         placeholder={i18nConfig.translate("sheet.name")}
-                        placeholderTextColor={colors.placeholder}
                         onChangeText={(text: string) => setNoteTitle(text)}
                       />
                     </View>
@@ -302,14 +273,9 @@ const BottomSheetComponent: React.FC<BottomSheetProps> = ({
                         editorStyles={styles.textArea}
                       />
                     ) : (
-                      <BottomSheetTextInput
-                        style={[
-                          defaultInputStyles,
-                          styles.textArea,
-                          { color: colors.text },
-                        ]}
+                      <TextInput
+                        type="textarea"
                         placeholder={i18nConfig.translate("sheet.body")}
-                        placeholderTextColor={colors.placeholder}
                         onChangeText={(text: string) => setNoteBody(text)}
                         multiline
                       />
@@ -350,15 +316,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     padding: 20,
     marginTop: 23,
-  },
-  input: {
-    width: 330,
-    marginTop: 8,
-    marginBottom: 10,
-    borderRadius: 10,
-    fontSize: 16,
-    padding: 8,
-    flexWrap: "wrap",
   },
   textArea: {
     width: 330,

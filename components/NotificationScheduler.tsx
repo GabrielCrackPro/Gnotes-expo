@@ -1,16 +1,11 @@
-import {
-  StyleProp,
-  StyleSheet,
-  TextInput,
-  TextStyle,
-  View,
-} from "react-native";
+import { StyleProp, StyleSheet, TextStyle, View } from "react-native";
 import React, { useState } from "react";
 import { useNotifications } from "../hooks/useNotifications";
 import Dropdown from "./Dropdown";
 import { Notification, NotificationTrigger } from "../models/Notification";
 import { Button, useTheme } from "react-native-paper";
 import i18nConfig from "../locales/i18n-config";
+import TextInput from "../atoms/TextInput";
 
 interface NotificationSchedulerProps {
   visible: boolean;
@@ -53,16 +48,15 @@ const NotificationScheduler: React.FC<NotificationSchedulerProps> = ({
   return visible ? (
     <View>
       <TextInput
-        style={[defaultInputStyles, styles.textInput]}
+        type="input"
         placeholder={i18nConfig.translate("notificationScheduler.title")}
-        placeholderTextColor={colors.placeholder}
         onChangeText={(text: string) => setNotificationTitle(text)}
       />
       <View style={styles.row}>
         <TextInput
-          style={[defaultInputStyles, styles.fromTextInput]}
+          type="input"
+          style={styles.fromTextInput}
           placeholder={i18nConfig.translate("notificationScheduler.in")}
-          placeholderTextColor={colors.placeholder}
           onChangeText={(text: string) => setNotificationFrom(Number(text))}
           keyboardType="numeric"
         />
@@ -83,9 +77,8 @@ const NotificationScheduler: React.FC<NotificationSchedulerProps> = ({
         />
       </View>
       <TextInput
-        style={[defaultInputStyles, styles.textArea]}
+        type="textarea"
         placeholder={i18nConfig.translate("notificationScheduler.body")}
-        placeholderTextColor={colors.placeholder}
         onChangeText={(text: string) => setNotificationBody(text)}
       />
       <Button onPress={handleNotification} mode="text">
@@ -107,11 +100,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   fromTextInput: {
-    marginTop: 8,
-    borderRadius: 10,
-    fontSize: 16,
-    padding: 8,
-    flexWrap: "wrap",
     width: 100,
     textAlign: "center",
   },
