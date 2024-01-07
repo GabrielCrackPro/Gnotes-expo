@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import * as Notifications from "expo-notifications";
-import { saveNotification } from "../utils/notifications";
+import {
+  getNotifications as getSavedNotifications,
+  saveNotification,
+} from "../utils/notifications";
 
 export const useNotifications = () => {
   useEffect(() => {
@@ -50,7 +53,19 @@ export const useNotifications = () => {
     }
   };
 
+  const getNotifications = async (): Promise<Notifications.Notification[]> => {
+    const notifications = await getSavedNotifications();
+    return notifications;
+  };
+
+  const getNotificationsCount = async (): Promise<number> => {
+    const notifications = await getSavedNotifications();
+    return notifications.length;
+  };
+
   return {
     scheduleNotification,
+    getNotifications,
+    getNotificationsCount,
   };
 };

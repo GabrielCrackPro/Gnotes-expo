@@ -6,8 +6,9 @@ import {
   ViewStyle,
 } from "react-native";
 import React from "react";
-import { Text, useTheme } from "react-native-paper";
+import { IconButton, Text, useTheme } from "react-native-paper";
 import * as Notifications from "expo-notifications";
+import { deleteNotification } from "../utils/notifications";
 
 interface NotificationCardProps {
   notification: Notifications.Notification;
@@ -30,8 +31,19 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
     color: colors.text,
   };
 
+  const handleDeleteNotification = async () => {
+    await deleteNotification(notification);
+    console.log("deleted");
+  };
+
   return (
     <View style={[defaultNotificationCardStyle, styles.notificationCard]}>
+      <IconButton
+        icon="close"
+        iconColor={colors.primary}
+        size={18}
+        onPress={handleDeleteNotification}
+      />
       <Text
         variant="titleMedium"
         style={[defaultNotificationTitleStyle, styles.notificatioTitle]}
@@ -57,9 +69,14 @@ const styles = StyleSheet.create({
   notificationCard: {
     marginVertical: 10,
     padding: 15,
+    position: "relative",
   },
   notificatioTitle: {
     fontWeight: "bold",
   },
   notificationDescription: {},
+  deleteIcon: {
+    position: "absolute",
+    right: 10,
+  },
 });

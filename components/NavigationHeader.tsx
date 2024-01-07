@@ -14,6 +14,7 @@ import { ParamListBase, RouteProp } from "@react-navigation/native";
 import { getBookFromId } from "../utils/books";
 import { useNavigation } from "../hooks/useNavigation";
 import i18nConfig from "../locales/i18n-config";
+import NotificationsCounter from "./NotificationsCounter";
 
 interface NavigationHeaderProps {
   route: RouteProp<ParamListBase, string>;
@@ -84,13 +85,8 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({ route }) => {
       )}
       {route.name !== "Notes" && (
         <View style={styles.row}>
-          <IconButton
-            icon="bell"
-            size={18}
-            iconColor={colors.primary}
-            onPress={() => navigation.goToNotifications()}
-          />
           <ThemeSwitcher />
+          <NotificationsCounter />
         </View>
       )}
     </SafeAreaView>
