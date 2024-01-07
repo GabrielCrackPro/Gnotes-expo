@@ -46,7 +46,7 @@ const NotificationScheduler: React.FC<NotificationSchedulerProps> = ({
     scheduleNotification(
       notificationToSend?.title,
       notificationToSend?.body,
-      notificationToSend?.trigger
+      notificationToSend?.trigger,
     );
   };
 
@@ -54,19 +54,25 @@ const NotificationScheduler: React.FC<NotificationSchedulerProps> = ({
     <View>
       <TextInput
         style={[defaultInputStyles, styles.textInput]}
-        placeholder="Notification title"
+        placeholder={i18nConfig.translate("notificationScheduler.title")}
         placeholderTextColor={colors.placeholder}
         onChangeText={(text: string) => setNotificationTitle(text)}
       />
       <View style={styles.row}>
         <TextInput
           style={[defaultInputStyles, styles.fromTextInput]}
-          placeholder="From"
+          placeholder={i18nConfig.translate("notificationScheduler.in")}
           placeholderTextColor={colors.placeholder}
           onChangeText={(text: string) => setNotificationFrom(Number(text))}
+          keyboardType="numeric"
         />
         <Dropdown
-          data={["seconds", "minutes", "hours"]}
+          placeholder={i18nConfig.translate("notificationScheduler.select")}
+          data={[
+            i18nConfig.translate("notificationScheduler.seconds"),
+            i18nConfig.translate("notificationScheduler.minutes"),
+            i18nConfig.translate("notificationScheduler.hours"),
+          ]}
           onSelect={(select: string) => {
             const trigger: NotificationTrigger = {
               channelId: "default",
@@ -78,7 +84,7 @@ const NotificationScheduler: React.FC<NotificationSchedulerProps> = ({
       </View>
       <TextInput
         style={[defaultInputStyles, styles.textArea]}
-        placeholder="Notification body"
+        placeholder={i18nConfig.translate("notificationScheduler.body")}
         placeholderTextColor={colors.placeholder}
         onChangeText={(text: string) => setNotificationBody(text)}
       />

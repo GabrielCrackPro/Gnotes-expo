@@ -7,10 +7,11 @@ import { useTheme } from "react-native-paper";
 interface DropdownProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any[];
+  placeholder: string;
   onSelect: (entry: any) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ data, onSelect }) => {
+const Dropdown: React.FC<DropdownProps> = ({ data, placeholder, onSelect }) => {
   const { colors } = useTheme();
 
   const defaultDropdownStyles: StyleProp<ViewStyle> = {
@@ -43,6 +44,7 @@ const Dropdown: React.FC<DropdownProps> = ({ data, onSelect }) => {
       rowStyle={defaultDropdownRowStyles}
       rowTextStyle={defaultDropdownTextStyles}
       selectedRowTextStyle={selectedRowTextStyles}
+      defaultButtonText={placeholder}
     />
   );
 };

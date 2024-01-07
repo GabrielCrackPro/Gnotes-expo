@@ -52,10 +52,20 @@
   },
   "header": {
     "Home": "Inicio",
-    "Settings": "Configuración"
+    "Settings": "Configuración",
+    "NotesDetails": "Detalles"
   },
   "buttons": {
     "accept": "Aceptar",
     "cancel": "Cancelar"
+  },
+  "notificationScheduler": {
+    "in": "Dentro de",
+    "hours": "Horas",
+    "minutes": "Minutos",
+    "seconds": "Segundos",
+    "title": "Titulo de notificación",
+    "body": "Cuerpo de notificación",
+    "select": "Selecciona"
   }
 }

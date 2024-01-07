@@ -7,6 +7,7 @@ import { IconButton, useTheme } from "react-native-paper";
 import { View } from "react-native";
 import NoteDetailsHeader from "./NoteDetailsHeader";
 import Notifications from "../screens/Notifications";
+import i18nConfig from "../locales/i18n-config";
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -31,7 +32,11 @@ const Navigation: React.FC = () => {
         options={({ route }) => ({
           headerLeft: () => <NoteDetailsHeader route={route} side="left" />,
           headerRight: () => <NoteDetailsHeader route={route} side="right" />,
-          title: `${route.params?.note.title} details`,
+          title: i18nConfig.translate(`header[${route.name}]`),
+          headerTitleStyle: {
+            color: colors.primary,
+            fontWeight: "bold",
+          },
           headerStyle: {
             backgroundColor: colors.background,
           },
@@ -40,9 +45,14 @@ const Navigation: React.FC = () => {
       <Stack.Screen
         name="Notifications"
         component={Notifications}
-        options={() => ({
+        options={({ route }) => ({
+          headerLeft: () => <NoteDetailsHeader route={route} side="left" />,
           headerStyle: {
             backgroundColor: colors.background,
+          },
+          headerTitleStyle: {
+            color: colors.primary,
+            fontWeight: "bold",
           },
         })}
       />

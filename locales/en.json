@@ -52,10 +52,20 @@
   },
   "header": {
     "Home": "Home",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "NotesDetails": "Details"
   },
   "buttons": {
     "accept": "Ok",
     "cancel": "Cancel"
+  },
+  "notificationScheduler": {
+    "in": "In",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "title": "Notification title",
+    "body": "Notification body",
+    "select": "Select"
   }
 }

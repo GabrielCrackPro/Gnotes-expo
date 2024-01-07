@@ -28,7 +28,9 @@ const checkExists = (
 };
 
 const clearStorage = async (callback: () => void) => {
-  await AsyncStorage.multiRemove(["books", "notes"]).then(callback);
+  await AsyncStorage.multiRemove(["books", "notes", "notifications"]).then(
+    callback,
+  );
 };
 
 export { setValue, getValue, checkExists, clearStorage };

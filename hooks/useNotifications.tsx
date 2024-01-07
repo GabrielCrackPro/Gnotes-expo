@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import * as Notifications from "expo-notifications";
+import { saveNotification } from "../utils/notifications";
 
 export const useNotifications = () => {
   useEffect(() => {
@@ -13,10 +14,10 @@ export const useNotifications = () => {
     requestNotificationPermission();
 
     const notificationListener = Notifications.addNotificationReceivedListener(
-      (notification) => {
+      async (notification) => {
         console.log("Notification received:", notification);
-        // Handle the received notification as needed
-      }
+        await saveNotification(notification);
+      },
     );
 
     const responseListener =
@@ -34,7 +35,7 @@ export const useNotifications = () => {
   const scheduleNotification = async (
     title: string,
     body: any,
-    trigger: Notifications.NotificationTriggerInput
+    trigger: Notifications.NotificationTriggerInput,
   ) => {
     try {
       await Notifications.scheduleNotificationAsync({
