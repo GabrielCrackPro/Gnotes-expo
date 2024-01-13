@@ -4,7 +4,6 @@ import DeleteDialog from "./DeleteDialog";
 import EmptyList from "./EmptyList";
 import LockedView from "./LockedView";
 import MiniNotificationScheduler from "./MiniNotificationScheduler";
-import Navigation from "./Navigation";
 import NavigationHeader from "./NavigationHeader";
 import NoteItem from "./Note";
 import NoteDetailsHeader from "./NoteDetailsHeader";
@@ -24,7 +23,6 @@ export {
   EmptyList,
   LockedView,
   MiniNotificationScheduler,
-  Navigation,
   NavigationHeader,
   NoteItem,
   NotesList,

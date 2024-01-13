@@ -13,6 +13,9 @@ import { useAppContext } from "../AppContext";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "../hooks/useNavigation";
 import i18nConfig from "../locales/i18n-config";
+import { SCREEN_NAMES } from "../constants/screens";
+import { GITHUB_URL } from "../constants/text";
+import * as Browser from "expo-web-browser";
 
 const Settings: React.FC = () => {
   const { colors } = useTheme();
@@ -41,8 +44,26 @@ const Settings: React.FC = () => {
     );
   };
 
+  const handleAbout = () => {
+    Browser.openBrowserAsync(GITHUB_URL);
+  };
+
   return (
     <View>
+      <List.Item
+        title={i18nConfig.translate("onboarding.navigate.title")}
+        description={i18nConfig.translate("onboarding.navigate.description")}
+        style={[defaultSettingsItemStyle, styles.row]}
+        titleStyle={[defaultSettingsTextStyle, styles.text]}
+        onPress={() => navigation.goToStackScreen(SCREEN_NAMES.ONBOARDING)}
+        left={() => (
+          <List.Icon
+            icon="information-variant"
+            color={colors.primary}
+            style={{ padding: 8 }}
+          />
+        )}
+      />
       <List.Item
         title={
           isAppLocked
@@ -56,7 +77,6 @@ const Settings: React.FC = () => {
         }
         style={[defaultSettingsItemStyle, styles.row]}
         titleStyle={[defaultSettingsTextStyle, styles.text]}
-        centered
         onPress={handleAppLock}
         left={() => (
           <List.Icon
@@ -71,7 +91,6 @@ const Settings: React.FC = () => {
         description={i18nConfig.translate("settings.deleteDescription")}
         style={[defaultSettingsItemStyle, styles.row]}
         titleStyle={[defaultSettingsTextStyle, styles.text]}
-        centered
         left={() => (
           <List.Icon
             icon="delete"
@@ -80,6 +99,20 @@ const Settings: React.FC = () => {
           />
         )}
         onPress={handleClear}
+      />
+      <List.Item
+        title={i18nConfig.translate("settings.aboutTitle")}
+        description={i18nConfig.translate("settings.aboutDescription")}
+        style={[defaultSettingsItemStyle, styles.row]}
+        titleStyle={[defaultSettingsTextStyle, styles.text]}
+        onPress={handleAbout}
+        left={() => (
+          <List.Icon
+            icon="github"
+            color={colors.primary}
+            style={{ padding: 8 }}
+          />
+        )}
       />
     </View>
   );

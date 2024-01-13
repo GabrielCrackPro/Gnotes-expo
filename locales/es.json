@@ -10,6 +10,10 @@
     "back": "Atrás",
     "skip": "Saltar",
     "finish": "Terminar",
+    "navigate": {
+      "title": "Ir a la pantalla de bienvenida",
+      "description": "Ver de nuevo la pantalla de bienvenida"
+    },
     "page1": {
       "title": "Crea notas",
       "description": "Comienza creando nuevas notas para tus ideas, pensamientos y tareas. ¡Captura todo sobre la marcha!"
@@ -65,7 +69,9 @@
     "unlockApp": "Desbloquear aplicación",
     "deleteDescription": "Eliminar todas las notas y los libros de la aplicación",
     "lockDescription": "Bloquear la aplicación usando datos biometricos o PIN",
-    "unlockDescription": "Desbloquear la aplicación"
+    "unlockDescription": "Desbloquear la aplicación",
+    "aboutTitle": "Saber más",
+    "aboutDescription": "Si quieres saber más sobre la aplicación pincha aquí"
   },
   "auth": {
     "verify": "Verifica tu identidad para continuar",

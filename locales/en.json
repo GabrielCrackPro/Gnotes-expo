@@ -10,6 +10,10 @@
     "back": "Back",
     "skip": "Skip",
     "finish": "Finish",
+    "navigate": {
+      "title": "Go to onboarding screen",
+      "description": "See the onboarding screen again"
+    },
     "page1": {
       "title": "Create notes",
       "description": "Start by creating new notes for your ideas, thoughts, and tasks. Capture everything on the go!"
@@ -65,7 +69,9 @@
     "unlockApp": "Unlock app",
     "deleteDescription": "Delete all notes and books in the app",
     "lockDescription": "Lock app using biometrics or PIN",
-    "unlockDescription": "Unlock app"
+    "unlockDescription": "Unlock app",
+    "aboutTitle": "About",
+    "aboutDescription": "To learn more about the app click here"
   },
   "auth": {
     "verify": "Verify your identity to continue",
