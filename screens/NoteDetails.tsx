@@ -1,12 +1,5 @@
-import {
-  ScrollView,
-  StyleProp,
-  StyleSheet,
-  TextInput,
-  TextStyle,
-  View,
-} from "react-native";
-import React, { useEffect, useState } from "react";
+import { StyleProp, StyleSheet, TextStyle, View } from "react-native";
+import React, { useState } from "react";
 import { Button, Text, useTheme } from "react-native-paper";
 import { useRoute } from "@react-navigation/native";
 import { Note } from "../models/Note";
@@ -18,6 +11,7 @@ import * as Browser from "expo-web-browser";
 import MarkdownEditor from "../components/MarkdownEditor/MarkdownEditor";
 import { useNavigation } from "../hooks/useNavigation";
 import i18nConfig from "../locales/i18n-config";
+import { TextInput } from "../atoms";
 
 interface RouteParams {
   note: Note;
@@ -80,6 +74,7 @@ const NoteDetails: React.FC = () => {
       {editMode && (
         <>
           <TextInput
+            type="input"
             value={editNoteTitle}
             onChangeText={(text: string) => setEditNoteTitle(text)}
             style={[defaultInputStyles, styles.textInput]}

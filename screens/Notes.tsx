@@ -4,11 +4,9 @@ import { useRoute } from "@react-navigation/native";
 import { Book, Note } from "../models/Note";
 import { getNotesByBook } from "../utils/notes";
 import { getBookFromId } from "../utils/books";
-import AuthView from "../components/AuthView";
-import NotesList from "../components/NotesList";
-import BottomSheetComponent from "../components/BottomSheet";
 import * as WebBrowser from "expo-web-browser";
 import i18nConfig from "../locales/i18n-config";
+import { AuthView, BottomSheetComponent, NotesList } from "../components";
 
 interface RouteParams {
   bookId: string;

@@ -1,10 +1,9 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as LocalNotifications from "expo-notifications";
-import NotificationCard from "../components/NotificationCard";
 import { useNotifications } from "../hooks/useNotifications";
-import EmptyList from "../components/EmptyList";
 import i18nConfig from "../locales/i18n-config";
+import { EmptyList, NotificationCard } from "../components";
 
 const Notifications: React.FC = () => {
   const [notifications, setNotifications] = useState<

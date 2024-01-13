@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IconButton, Text, useTheme } from "react-native-paper";
 import { useNotifications } from "../hooks/useNotifications";
 import { useNavigation } from "../hooks/useNavigation";
+import { SCREEN_NAMES } from "../constants/screens";
 
 const NotificationsCounter: React.FC = () => {
   const { colors } = useTheme();
@@ -26,7 +27,7 @@ const NotificationsCounter: React.FC = () => {
         icon={count === 0 ? "bell" : "bell-badge"}
         size={18}
         iconColor={colors.primary}
-        onPress={() => navigation.goToNotifications()}
+        onPress={() => navigation.goToStackScreen(SCREEN_NAMES.NOTIFICATIONS)}
       />
       {count > 0 && (
         <Text

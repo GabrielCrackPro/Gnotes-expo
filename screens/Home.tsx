@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useTheme, Text, Icon } from "react-native-paper";
-import BottomSheetComponent from "../components/BottomSheet";
 import { Book, Note } from "../models/Note";
-import DeleteDialog from "../components/DeleteDialog";
 import { useNavigation } from "../hooks/useNavigation";
 import * as Haptics from "expo-haptics";
 import i18nConfig from "../locales/i18n-config";
+import { BottomSheetComponent, DeleteDialog } from "../components";
 
 interface RouteParams {
   add: boolean;

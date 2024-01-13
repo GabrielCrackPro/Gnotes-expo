@@ -1,13 +1,12 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeNavigator from "../navigators/HomeNavigator";
-import Auth from "../screens/Auth";
-import NoteDetails from "../screens/NoteDetails";
 import NoteDetailsHeader from "./NoteDetailsHeader";
-import Notifications from "../screens/Notifications";
 import { getHeaderTitle } from "../utils/common";
 import { useTheme } from "react-native-paper";
-import Onboarding from "../screens/Onboarding";
+import { Auth, NoteDetails, Notifications, Onboarding } from "../screens";
+import { SCREEN_NAMES } from "../constants/screens";
+
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator();
 
@@ -16,22 +15,22 @@ const Navigation: React.FC = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Auth"
+        name={SCREEN_NAMES.AUTH}
         component={Auth}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Onboarding"
+        name={SCREEN_NAMES.ONBOARDING}
         component={Onboarding}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="HomeNavigator"
+        name={SCREEN_NAMES.HOME_NAVIGATOR}
         component={HomeNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="NotesDetails"
+        name={SCREEN_NAMES.NOTES_DETAILS}
         component={NoteDetails}
         options={({ route }) => ({
           headerLeft: () => <NoteDetailsHeader route={route} side="left" />,
@@ -47,7 +46,7 @@ const Navigation: React.FC = () => {
         })}
       />
       <Stack.Screen
-        name="Notifications"
+        name={SCREEN_NAMES.NOTIFICATIONS}
         component={Notifications}
         options={({ route }) => ({
           headerLeft: () => <NoteDetailsHeader route={route} side="left" />,

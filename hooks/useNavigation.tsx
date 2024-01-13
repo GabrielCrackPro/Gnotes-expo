@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/native";
 import { DrawerNavigation } from "../models/navigation";
 import { Note } from "../models/Note";
+import { SCREEN_NAMES } from "../constants/screens";
 
 export const useNavigation = () => {
   const navigation = useRNNavigation<DrawerNavigation>();
@@ -16,15 +17,15 @@ export const useNavigation = () => {
   };
 
   const goHome = () => {
-    navigation.navigate("HomeNavigator", {
-      screen: "Home",
+    navigation.navigate(SCREEN_NAMES.HOME_NAVIGATOR, {
+      screen: SCREEN_NAMES.HOME,
       params: { add: false },
     });
   };
 
   const goToNotes = (bookId: string) => {
-    navigation.navigate("HomeNavigator", {
-      screen: "Notes",
+    navigation.navigate(SCREEN_NAMES.HOME_NAVIGATOR, {
+      screen: SCREEN_NAMES.NOTES,
       params: {
         bookId,
       },
@@ -34,7 +35,7 @@ export const useNavigation = () => {
   const goToNotesDetails = (note: Note) => {
     navigation.dispatch(
       CommonActions.navigate({
-        name: "NotesDetails",
+        name: SCREEN_NAMES.NOTES_DETAILS,
         params: { note },
       }),
     );
@@ -43,15 +44,15 @@ export const useNavigation = () => {
   const goToNotesDetailsEdit = (note: Note) => {
     navigation.dispatch(
       CommonActions.navigate({
-        name: "NotesDetails",
+        name: SCREEN_NAMES.NOTES_DETAILS,
         params: { note, edit: true },
       }),
     );
   };
 
   const goToAddScreen = (screen: "Home" | "Notes", bookId?: string) => {
-    if (screen === "Notes") {
-      navigation.navigate("HomeNavigator", {
+    if (screen === SCREEN_NAMES.NOTES) {
+      navigation.navigate(SCREEN_NAMES.HOME_NAVIGATOR, {
         screen,
         params: {
           add: true,
@@ -59,7 +60,7 @@ export const useNavigation = () => {
         },
       });
     } else {
-      navigation.navigate("HomeNavigator", {
+      navigation.navigate(SCREEN_NAMES.HOME_NAVIGATOR, {
         screen,
         params: {
           add: true,
@@ -68,29 +69,24 @@ export const useNavigation = () => {
     }
   };
 
+  const goToStackScreen = (name: SCREEN_NAMES) => {
+    navigation.dispatch(CommonActions.navigate({ name }));
+  };
+
   const goToSettings = () => {
-    navigation.navigate("HomeNavigator", {
-      screen: "Settings",
+    navigation.navigate(SCREEN_NAMES.HOME_NAVIGATOR, {
+      screen: SCREEN_NAMES.SETTINGS,
     });
   };
 
-  const dissmissBottomSheet = (screen: "Home" | "Notes", bookId?: string) => {
-    navigation.navigate("HomeNavigator", {
+  const dissmissBottomSheet = (
+    screen: SCREEN_NAMES.HOME | SCREEN_NAMES.NOTES,
+    bookId?: string,
+  ) => {
+    navigation.navigate(SCREEN_NAMES.HOME_NAVIGATOR, {
       screen,
       params: { add: false, bookId },
     });
-  };
-
-  const goToNotifications = () => {
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: "Notifications",
-      }),
-    );
-  };
-
-  const goToOnboarding = () => {
-    navigation.dispatch(CommonActions.navigate({ name: "Onboarding" }));
   };
 
   const toggleDrawer = () => navigation.dispatch(DrawerActions.toggleDrawer());
@@ -105,8 +101,7 @@ export const useNavigation = () => {
     goToAddScreen,
     goToNotesDetails,
     goToNotesDetailsEdit,
-    goToNotifications,
-    goToOnboarding,
+    goToStackScreen,
     goBack,
     dissmissBottomSheet,
     openDrawer,

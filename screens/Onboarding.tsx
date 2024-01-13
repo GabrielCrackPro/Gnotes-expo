@@ -16,7 +16,7 @@ import { GITHUB_URL } from "../constants/text";
 import { setValue } from "../utils/storage";
 import * as Browser from "expo-web-browser";
 
-const OnboardingScreen = () => {
+const Onboarding: React.FC = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
@@ -204,4 +204,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OnboardingScreen;
+export default Onboarding;

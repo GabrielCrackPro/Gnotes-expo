@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
-import LockedView from "../components/LockedView";
 import { useAppContext } from "../AppContext";
 import { useNavigation } from "../hooks/useNavigation";
 import i18nConfig from "../locales/i18n-config";
 import { getValue } from "../utils/storage";
+import { LockedView } from "../components";
+import { SCREEN_NAMES } from "../constants/screens";
 
 const Auth = () => {
   const navigation = useNavigation();
@@ -17,10 +18,8 @@ const Auth = () => {
   useEffect(() => {
     const handleScreens = async () => {
       await getValue("showOnboarding")?.then((showOnboarding) => {
-        console.log("so", showOnboarding);
-
         if (showOnboarding === null) {
-          navigation.goToOnboarding();
+          navigation.goToStackScreen(SCREEN_NAMES.ONBOARDING);
         } else {
           navigation.goHome();
         }
@@ -32,7 +31,7 @@ const Auth = () => {
           authMessage: i18nConfig.translate("auth.appLocked"),
           persistent: true,
         },
-        navigation.goHome
+        navigation.goHome,
       );
     } else {
       handleScreens();

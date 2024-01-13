@@ -1,9 +1,8 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Home from "../screens/Home";
 import BookList from "../components/BookList";
-import Notes from "../screens/Notes";
 import NavigationHeader from "../components/NavigationHeader";
-import Settings from "../screens/Settings";
+import { Home, Notes, Settings } from "../screens";
+import { SCREEN_NAMES } from "../constants/screens";
 
 const HomeNavigator: React.FC = () => {
   const Drawer = createDrawerNavigator();
@@ -16,9 +15,9 @@ const HomeNavigator: React.FC = () => {
       })}
       drawerContent={() => <BookList />}
     >
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Notes" component={Notes} />
-      <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name={SCREEN_NAMES.HOME} component={Home} />
+      <Drawer.Screen name={SCREEN_NAMES.NOTES} component={Notes} />
+      <Drawer.Screen name={SCREEN_NAMES.SETTINGS} component={Settings} />
     </Drawer.Navigator>
   );
 };
