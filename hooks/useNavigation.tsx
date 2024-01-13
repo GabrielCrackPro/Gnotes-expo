@@ -89,6 +89,10 @@ export const useNavigation = () => {
     );
   };
 
+  const goToOnboarding = () => {
+    navigation.dispatch(CommonActions.navigate({ name: "Onboarding" }));
+  };
+
   const toggleDrawer = () => navigation.dispatch(DrawerActions.toggleDrawer());
   const openDrawer = () => navigation.dispatch(DrawerActions.openDrawer());
   const closeDrawer = () => navigation.dispatch(DrawerActions.closeDrawer());
@@ -102,6 +106,7 @@ export const useNavigation = () => {
     goToNotesDetails,
     goToNotesDetailsEdit,
     goToNotifications,
+    goToOnboarding,
     goBack,
     dissmissBottomSheet,
     openDrawer,

@@ -5,6 +5,32 @@
     "createBook": "Crear libro",
     "noBooks": "No hay libros"
   },
+  "onboarding": {
+    "continue": "Continuar",
+    "back": "Atrás",
+    "skip": "Saltar",
+    "finish": "Terminar",
+    "page1": {
+      "title": "Crea notas",
+      "description": "Comienza creando nuevas notas para tus ideas, pensamientos y tareas. ¡Captura todo sobre la marcha!"
+    },
+    "page2": {
+      "title": "Organizate",
+      "description": "Mantente organizado categorizando tus notas en libros. Encuentra y gestiona fácilmente tus notas con un sistema de organización simple."
+    },
+    "page3": {
+      "title": "Maten tus datos seguros",
+      "description": "Protege tus datos usando los métodos de autenticación del dispositivo"
+    },
+    "page4": {
+      "title": "Personaliza la experiencia",
+      "description": "Adapta la aplicación a tus gustos cambiando los colores y más"
+    },
+    "page5": {
+      "title": "Saber más",
+      "description": "Para aprender más sobre la aplicación presiona el botón de abajo"
+    }
+  },
   "home": {
     "welcome": "Selecciona un libro del menu lateral para ver sus notas",
     "subWelcome": "O crea uno nuevo presionando el simbolo +"

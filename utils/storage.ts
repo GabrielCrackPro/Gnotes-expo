@@ -21,16 +21,19 @@ const getValue = (key: string) => {
 
 const checkExists = (
   arr: Note[] | Book[],
-  newElement: Note | Book,
+  newElement: Note | Book
 ): boolean => {
   const ids = arr.map((el) => el.id);
   return ids.includes(newElement.id);
 };
 
 const clearStorage = async (callback: () => void) => {
-  await AsyncStorage.multiRemove(["books", "notes", "notifications"]).then(
-    callback,
-  );
+  await AsyncStorage.multiRemove([
+    "books",
+    "notes",
+    "notifications",
+    "showOnboarding",
+  ]).then(callback);
 };
 
 export { setValue, getValue, checkExists, clearStorage };

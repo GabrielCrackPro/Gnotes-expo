@@ -5,6 +5,32 @@
     "createBook": "Create Book",
     "noBooks": "No books"
   },
+  "onboarding": {
+    "continue": "Continue",
+    "back": "Back",
+    "skip": "Skip",
+    "finish": "Finish",
+    "page1": {
+      "title": "Create notes",
+      "description": "Start by creating new notes for your ideas, thoughts, and tasks. Capture everything on the go!"
+    },
+    "page2": {
+      "title": "Organize yourself",
+      "description": "Stay organized by categorizing your notes into books. Easily find and manage your notes with a simple organization system."
+    },
+    "page3": {
+      "title": "Secure your data",
+      "description": "Mantain your data safe by limiting access using device authentification"
+    },
+    "page4": {
+      "title": "Customize experience",
+      "description": "Make app yours by changing the colors and more"
+    },
+    "page5": {
+      "title": "About",
+      "description": "To learn more about the app press the button below"
+    }
+  },
   "home": {
     "welcome": "Select a book from the sidebar to view notes",
     "subWelcome": "Or create a new one by pressing the + symbol"

@@ -4,6 +4,7 @@ import LockedView from "../components/LockedView";
 import { useAppContext } from "../AppContext";
 import { useNavigation } from "../hooks/useNavigation";
 import i18nConfig from "../locales/i18n-config";
+import { getValue } from "../utils/storage";
 
 const Auth = () => {
   const navigation = useNavigation();
@@ -13,19 +14,28 @@ const Auth = () => {
     authMessage: i18nConfig.translate("auth.appLocked"),
   });
 
-  const redirectToHome = () => navigation.goHome();
-
   useEffect(() => {
+    const handleScreens = async () => {
+      await getValue("showOnboarding")?.then((showOnboarding) => {
+        console.log("so", showOnboarding);
+
+        if (showOnboarding === null) {
+          navigation.goToOnboarding();
+        } else {
+          navigation.goHome();
+        }
+      });
+    };
     if (isAppLocked) {
       requestAuth(
         {
           authMessage: i18nConfig.translate("auth.appLocked"),
           persistent: true,
         },
-        redirectToHome,
+        navigation.goHome
       );
     } else {
-      redirectToHome();
+      handleScreens();
     }
   }, [isAppLocked]);
 

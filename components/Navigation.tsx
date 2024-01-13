@@ -7,7 +7,7 @@ import NoteDetailsHeader from "./NoteDetailsHeader";
 import Notifications from "../screens/Notifications";
 import { getHeaderTitle } from "../utils/common";
 import { useTheme } from "react-native-paper";
-
+import Onboarding from "../screens/Onboarding";
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator();
 
@@ -18,6 +18,11 @@ const Navigation: React.FC = () => {
       <Stack.Screen
         name="Auth"
         component={Auth}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Onboarding"
+        component={Onboarding}
         options={{ headerShown: false }}
       />
       <Stack.Screen

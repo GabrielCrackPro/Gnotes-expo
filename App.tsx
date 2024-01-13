@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { Platform } from "react-native";
 import i18nConfig from "./locales/i18n-config";
 import { useNotifications } from "./hooks/useNotifications";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   const { isDark, toggleDark } = useDarkMode();
@@ -59,12 +60,14 @@ export default function App() {
   return (
     <AppContext.Provider value={globals}>
       <PaperProvider theme={isDark ? darkTheme : lightTheme}>
-        <SafeAreaProvider>
-          <StatusBar.StatusBar animated style={isDark ? "light" : "dark"} />
-          <NavigationContainer theme={isDark ? darkTheme : lightTheme}>
-            <Navigation />
-          </NavigationContainer>
-        </SafeAreaProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <SafeAreaProvider>
+            <StatusBar.StatusBar animated style={isDark ? "light" : "dark"} />
+            <NavigationContainer theme={isDark ? darkTheme : lightTheme}>
+              <Navigation />
+            </NavigationContainer>
+          </SafeAreaProvider>
+        </GestureHandlerRootView>
       </PaperProvider>
     </AppContext.Provider>
   );
