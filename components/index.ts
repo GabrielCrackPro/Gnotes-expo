@@ -8,6 +8,7 @@ import NavigationHeader from "./NavigationHeader";
 import NoteItem from "./Note";
 import NoteDetailsHeader from "./NoteDetailsHeader";
 import NotesList from "./NotesList";
+import NotesFilter from "./NotesFilter";
 import NotificationCard from "./NotificationCard";
 import NotificationScheduler from "./NotificationScheduler";
 import NotificationsCounter from "./NotificationsCounter";
@@ -26,6 +27,7 @@ export {
   NavigationHeader,
   NoteItem,
   NotesList,
+  NotesFilter,
   NoteDetailsHeader,
   NotificationCard,
   NotificationsCounter,

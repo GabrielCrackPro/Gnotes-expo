@@ -30,6 +30,7 @@ const TextInput: React.FC<TextInputProps> = ({ type, style, ...props }) => {
         style,
       ]}
       placeholderTextColor={colors.placeholder}
+      multiline={type === "textarea"}
       {...props}
     />
   );

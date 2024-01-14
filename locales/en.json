@@ -106,5 +106,14 @@
     "emptyTitle": "There are no notifications to show",
     "emptyDescription": "When you recieve a notification you will see it here",
     "delete": "Delete"
+  },
+  "notesFilter": {
+    "visible": "Hide",
+    "hidden": "Filter",
+    "clear": "Clear",
+    "simpleText": "Simple Text",
+    "markdown": "Markdown",
+    "title": "Title",
+    "body": "Body"
   }
 }

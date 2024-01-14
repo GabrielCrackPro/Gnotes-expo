@@ -106,5 +106,14 @@
     "emptyTitle": "No hay notificaciones",
     "emptyDescription": "Cuando recibas notificaciones aparecerán aquí",
     "delete": "Eliminar"
+  },
+  "notesFilter": {
+    "visible": "Ocultar",
+    "hidden": "Filtro",
+    "clear": "Limpiar",
+    "simpleText": "Texto plano",
+    "markdown": "Markdown",
+    "title": "Titulo",
+    "body": "Contenido"
   }
 }
