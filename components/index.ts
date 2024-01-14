@@ -15,6 +15,7 @@ import NotificationsCounter from "./NotificationsCounter";
 import RichEditor from "./RichEditor";
 import ThemeSwitcher from "./ThemeSwitcher";
 import BottomSheetComponent from "./BottomSheet";
+import SettingsTile from "./SettingsTile";
 
 export {
   AuthView,
@@ -34,4 +35,5 @@ export {
   NotificationScheduler,
   RichEditor,
   ThemeSwitcher,
+  SettingsTile,
 };
