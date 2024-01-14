@@ -71,7 +71,9 @@
     "lockDescription": "Lock app using biometrics or PIN",
     "unlockDescription": "Unlock app",
     "aboutTitle": "About",
-    "aboutDescription": "To learn more about the app click here"
+    "aboutDescription": "To learn more about the app click here",
+    "customizeTitle": "Customize",
+    "customizeDescription": "Customize the app look-and-feel"
   },
   "auth": {
     "verify": "Verify your identity to continue",
@@ -87,7 +89,8 @@
     "Home": "Home",
     "Settings": "Settings",
     "NotesDetails": "Details",
-    "Notifications": "Notifications"
+    "Notifications": "Notifications",
+    "Customize": "Customize"
   },
   "buttons": {
     "accept": "Ok",

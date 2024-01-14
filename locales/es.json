@@ -71,7 +71,9 @@
     "lockDescription": "Bloquear la aplicación usando datos biometricos o PIN",
     "unlockDescription": "Desbloquear la aplicación",
     "aboutTitle": "Saber más",
-    "aboutDescription": "Si quieres saber más sobre la aplicación pincha aquí"
+    "aboutDescription": "Si quieres saber más sobre la aplicación pincha aquí",
+    "customizeTitle": "Personalizar",
+    "customizeDescription": "Personaliza la apariencia de la aplicación"
   },
   "auth": {
     "verify": "Verifica tu identidad para continuar",
@@ -87,7 +89,8 @@
     "Home": "Inicio",
     "Settings": "Configuración",
     "NotesDetails": "Detalles",
-    "Notifications": "Notificaciones"
+    "Notifications": "Notificaciones",
+    "Customize": "Personalizar"
   },
   "buttons": {
     "accept": "Aceptar",

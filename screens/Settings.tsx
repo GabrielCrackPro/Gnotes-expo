@@ -10,6 +10,13 @@ import { GITHUB_URL } from "../constants/text";
 import { SettingsTile } from "../components";
 import * as Browser from "expo-web-browser";
 
+interface SettingsTile {
+  title: string;
+  description: string;
+  icon: string;
+  onPress?: () => void;
+}
+
 const Settings: React.FC = () => {
   const navigation = useNavigation();
   const { isAppLocked, toggleAppLocked } = useAppContext();
@@ -31,7 +38,7 @@ const Settings: React.FC = () => {
 
   const handleAbout = () => Browser.openBrowserAsync(GITHUB_URL);
 
-  const settingsTiles = [
+  const settingsTiles: SettingsTile[] = [
     {
       title: i18nConfig.translate("onboarding.navigate.title"),
       description: i18nConfig.translate("onboarding.navigate.description"),
@@ -47,6 +54,12 @@ const Settings: React.FC = () => {
         : i18nConfig.translate("settings.lockDescription"),
       icon: isAppLocked ? "lock" : "lock-open-variant",
       onPress: handleAppLock,
+    },
+    {
+      title: i18nConfig.translate("settings.customizeTitle"),
+      description: i18nConfig.translate("settings.customizeDescription"),
+      icon: "palette",
+      onPress: () => navigation.goToStackScreen(SCREEN_NAMES.CUSTOMIZE),
     },
     {
       title: i18nConfig.translate("settings.deleteAll"),

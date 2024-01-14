@@ -7,4 +7,5 @@ export enum SCREEN_NAMES {
   HOME = "Home",
   NOTES = "Notes",
   SETTINGS = "Settings",
+  CUSTOMIZE = "Customize",
 }

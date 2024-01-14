@@ -5,5 +5,15 @@ import Notifications from "./Notifications";
 import Home from "./Home";
 import Notes from "./Notes";
 import Settings from "./Settings";
+import Customize from "./Customize";
 
-export { Auth, Onboarding, NoteDetails, Notifications, Home, Notes, Settings };
+export {
+  Auth,
+  Onboarding,
+  NoteDetails,
+  Notifications,
+  Home,
+  Notes,
+  Settings,
+  Customize,
+};

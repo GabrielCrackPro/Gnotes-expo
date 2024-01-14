@@ -4,13 +4,29 @@ import HomeNavigator from "../navigators/HomeNavigator";
 import NoteDetailsHeader from "./NoteDetailsHeader";
 import { getHeaderTitle } from "../utils/common";
 import { useTheme } from "react-native-paper";
-import { Auth, NoteDetails, Notifications, Onboarding } from "../screens";
+import {
+  Auth,
+  Customize,
+  NoteDetails,
+  Notifications,
+  Onboarding,
+} from "../screens";
 import { SCREEN_NAMES } from "../constants/screens";
+import { StyleProp, TextStyle, ViewStyle } from "react-native";
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator();
 
   const { colors } = useTheme();
+
+  const stackHeaderStyle: StyleProp<ViewStyle> = {
+    backgroundColor: colors.background,
+  };
+
+  const stackHeaderTextStyle: StyleProp<TextStyle> = {
+    color: colors.primary,
+    fontWeight: "bold",
+  };
 
   return (
     <Stack.Navigator>
@@ -30,19 +46,24 @@ const Navigation: React.FC = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name={SCREEN_NAMES.CUSTOMIZE}
+        component={Customize}
+        options={({ route }) => ({
+          headerLeft: () => <NoteDetailsHeader route={route} side="left" />,
+          title: getHeaderTitle(route.name),
+          headerStyle: stackHeaderStyle,
+          headerTitleStyle: stackHeaderTextStyle,
+        })}
+      />
+      <Stack.Screen
         name={SCREEN_NAMES.NOTES_DETAILS}
         component={NoteDetails}
         options={({ route }) => ({
           headerLeft: () => <NoteDetailsHeader route={route} side="left" />,
           headerRight: () => <NoteDetailsHeader route={route} side="right" />,
           title: getHeaderTitle(route.name),
-          headerTitleStyle: {
-            color: colors.primary,
-            fontWeight: "bold",
-          },
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
+          headerTitleStyle: stackHeaderTextStyle,
+          headerStyle: stackHeaderStyle,
         })}
       />
       <Stack.Screen
@@ -51,13 +72,8 @@ const Navigation: React.FC = () => {
         options={({ route }) => ({
           headerLeft: () => <NoteDetailsHeader route={route} side="left" />,
           title: getHeaderTitle(route.name),
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTitleStyle: {
-            color: colors.primary,
-            fontWeight: "bold",
-          },
+          headerTitleStyle: stackHeaderTextStyle,
+          headerStyle: stackHeaderStyle,
         })}
       />
     </Stack.Navigator>
